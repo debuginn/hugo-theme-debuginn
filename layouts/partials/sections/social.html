@@ -1,0 +1,20 @@
+{{- $links := .cfg.social.links | default slice -}}
+{{- $bg := index .cfg.home.backgrounds 1 | default (index .cfg.home.backgrounds 0) -}}
+{{- $total := 0 -}}{{- range $links }}{{ with .followers }}{{ $total = add $total . }}{{ end }}{{ end -}}
+<section class="page-screen page-screen-social" id="{{ .section.id }}" data-section="{{ .section.id }}" data-social-section data-backgrounds="{{ .cfg.home.backgrounds | jsonify }}" data-thumbs="{{ .cfg.home.backgroundsThumb | jsonify }}">
+  <div class="page-bg" aria-hidden="true"><img src="{{ $bg }}" alt="" loading="lazy" decoding="async" data-social-bg></div>
+  <div class="social-page">
+    <div class="social-links">
+      {{ range $links }}
+        {{- $hasQr := .qrImage -}}
+        {{ if $hasQr }}<button class="social-btn social-btn-wechat" type="button" aria-label="{{ .label }}">{{ else }}<a class="social-btn" href="{{ .href }}" target="_blank" rel="noreferrer" aria-label="{{ .label }}">{{ end }}
+          <span class="social-btn-icon">{{ partial "social-icon.html" . }}</span>
+          <span class="social-btn-label">{{ .label }}</span>
+          {{ with .followers }}<span class="social-btn-badge" data-count-to="{{ . }}">0</span>{{ end }}
+          {{ with .qrImage }}<span class="social-btn-qr" aria-hidden="true"><img src="{{ . }}" alt="微信二维码" width="120" height="120" loading="lazy" decoding="async"></span>{{ end }}
+        {{ if $hasQr }}</button>{{ else }}</a>{{ end }}
+      {{ end }}
+    </div>
+    {{ if gt $total 0 }}<div class="social-total"><span class="social-total-label">Total </span><span class="social-total-num" data-count-to="{{ $total }}">0</span><span class="social-total-label"> Subscribers</span></div>{{ end }}
+  </div>
+</section>

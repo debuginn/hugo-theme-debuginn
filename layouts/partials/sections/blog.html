@@ -1,0 +1,16 @@
+{{- $posts := first 4 .cfg.blog.posts -}}
+<section class="page-screen page-screen-blog" id="{{ .section.id }}" data-section="{{ .section.id }}">
+  <div class="blog-backdrop-word" aria-hidden="true">BLOG</div>
+  <div class="blog-page">
+    <div class="blog-grid">
+      {{ range $index, $post := $posts }}
+        <a class="blog-card blog-card--post blog-card--{{ add $index 1 }}" href="{{ $post.link }}" target="_blank" rel="noreferrer">
+          {{ with $post.image }}
+            <div class="blog-card-image"><img src="{{ . }}" alt="" loading="{{ if lt $index 2 }}eager{{ else }}lazy{{ end }}" fetchpriority="{{ if lt $index 2 }}high{{ else }}auto{{ end }}" decoding="async"></div>
+          {{ end }}
+          <div class="blog-card-body"><div class="blog-card-date">{{ time.Format "2006 / 01 / 02" $post.date }}</div><h3 class="blog-card-title">{{ $post.title }}</h3></div>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>

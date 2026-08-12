@@ -1,0 +1,7 @@
+{{- $home := .cfg.home -}}
+{{- $bg := index $home.backgrounds 0 -}}
+{{- $thumb := "" -}}{{- if gt (len ($home.backgroundsThumb | default slice)) 0 -}}{{- $thumb = index $home.backgroundsThumb 0 -}}{{- end -}}
+<section class="page-screen page-screen-home" id="{{ .section.id }}" data-section="{{ .section.id }}" data-backgrounds="{{ $home.backgrounds | jsonify }}" data-thumbs="{{ $home.backgroundsThumb | jsonify }}">
+  <div class="page-bg" aria-hidden="true"><img src="{{ $bg }}" alt="" loading="eager" decoding="async" data-home-bg></div>
+  <div class="site-wrapper"><div class="site-wrapper-inner"><div class="cover-container"><div class="inner cover"><p class="lead" id="hitokoto" data-quote-endpoint="{{ $home.quoteApi.endpoint }}" data-quote-link-base="{{ $home.quoteApi.linkBase }}">:D 获取中...</p></div></div></div></div>
+</section>

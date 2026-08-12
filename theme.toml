@@ -1,0 +1,13 @@
+name = "DebugInn"
+license = "MIT"
+licenselink = "https://github.com/debuginn/hugo-theme-debuginn/blob/main/LICENSE"
+description = "A data-driven fullscreen personal homepage theme for Hugo."
+homepage = "https://github.com/debuginn/hugo-theme-debuginn"
+demosite = "https://debuginn.com"
+tags = ["personal", "portfolio", "profile", "onepage", "responsive"]
+features = ["fullscreen sections", "data driven", "blog cards", "social links", "extension sections"]
+min_version = "0.128.0"
+
+[author]
+  name = "Meng小羽"
+  homepage = "https://debuginn.com"

@@ -1,0 +1,6 @@
+{{- $cfg := partial "functions/site-config.html" . -}}
+<!doctype html>
+<html lang="{{ default site.Language.Lang $cfg.site.lang }}">
+  <head>{{ partial "head.html" . }}</head>
+  <body>{{ block "main" . }}{{ end }}{{ partial "scripts.html" . }}</body>
+</html>

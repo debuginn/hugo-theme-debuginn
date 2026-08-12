@@ -1,0 +1,3 @@
+[submodule "extensions/flybay"]
+	path = extensions/flybay
+	url = git@github.com:debuginn/flyBay.git

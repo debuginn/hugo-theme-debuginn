@@ -1,0 +1,3 @@
+{{- $cfg := hugo.Data.site -}}
+{{- if not $cfg -}}{{- $cfg = site.Params.debuginn -}}{{- end -}}
+{{- return $cfg -}}

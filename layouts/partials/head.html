@@ -1,0 +1,32 @@
+{{- $cfg := partial "functions/site-config.html" . -}}
+{{- $site := $cfg.site -}}
+{{- $themeColor := default "#0b1220" $site.themeColor -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ $site.title | default site.Title }}</title>
+<meta name="description" content="{{ $site.description | default site.Params.description }}">
+<meta name="theme-color" content="{{ $themeColor }}">
+{{ with $site.url }}<link rel="canonical" href="{{ . }}">{{ end }}
+{{ range $lang, $href := $site.alternates }}<link rel="alternate" hreflang="{{ $lang }}" href="{{ $href }}">{{ end }}
+{{ with index $cfg.home.backgrounds 0 }}<meta property="og:image" content="{{ . }}">{{ end }}
+<meta property="og:title" content="{{ $site.title | default site.Title }}">
+<meta property="og:description" content="{{ $site.description | default site.Params.description }}">
+{{ with $site.url }}<meta property="og:url" content="{{ . }}">{{ end }}
+{{ range $site.assetOrigins }}<link rel="dns-prefetch" href="{{ . }}"><link rel="preconnect" href="{{ . }}" crossorigin>{{ end }}
+<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+<link rel="manifest" href="/static/site.webmanifest">
+<link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="{{ $themeColor }}">
+{{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{ range $name, $extension := $cfg.extensions }}
+  {{- if and $extension.enabled $extension.styles -}}
+    {{- range $extension.styles -}}
+      {{- with resources.Get . -}}
+        {{- $extensionCSS := . | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $extensionCSS.RelPermalink }}" integrity="{{ $extensionCSS.Data.Integrity }}" crossorigin="anonymous">
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{ end }}

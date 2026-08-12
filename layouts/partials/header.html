@@ -1,0 +1,6 @@
+<div class="global-header masthead clearfix global-header--light" data-site-header>
+  <div class="inner">
+    <h3 class="masthead-brand"><a href="{{ .cfg.site.homeHref | default "/" }}">{{ .cfg.site.title }}</a></h3>
+    {{ with .cfg.nav }}<nav><ul class="nav masthead-nav">{{ range . }}<li><a href="{{ .href }}">{{ .label }}</a></li>{{ end }}</ul></nav>{{ end }}
+  </div>
+</div>

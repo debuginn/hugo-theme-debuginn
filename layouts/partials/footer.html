@@ -1,0 +1,6 @@
+<div class="global-footer" data-site-footer>
+  <div class="mastfoot mastfoot--light"><div class="inner">
+    {{ with .cfg.home.photoCredit }}<p class="photo-credit" data-footer-photo>{{ .text }} <a href="{{ .linkHref }}">{{ .linkLabel }}</a>{{ .suffix }}</p>{{ end }}
+    <p class="copyright-text" data-footer-copyright hidden>© {{ .cfg.site.copyrightStartYear }}-{{ now.Format "2006" }} <a href="{{ .cfg.site.url }}">{{ .cfg.site.title }}</a></p>
+  </div></div>
+</div>

@@ -1,0 +1,64 @@
+# DebugInn Hugo Theme
+
+DebugInn Hugo Theme is the open-source Hugo theme extraction of debuginn.com. The theme owns the fullscreen shell, shared sections, and extension slots. Business modules such as FlyBay stay in their own repositories and are mounted as Git submodules.
+
+## Usage
+
+Clone this theme into your Hugo site:
+
+```bash
+git submodule add git@github.com:debuginn/hugo-theme-debuginn.git themes/hugo-theme-debuginn
+```
+
+Configure Hugo:
+
+```toml
+theme = "hugo-theme-debuginn"
+```
+
+The theme reads page data from `data/site.json` first, then `params.debuginn`.
+
+## Extension Modules
+
+A section can declare an external module:
+
+```json
+{ "id": "flybay", "type": "extension", "module": "flybay" }
+```
+
+The theme looks up `extensions.flybay` and renders the partial named by `partial`, defaulting to `debuginn/extensions/flybay.html`. That partial should come from the module repository, not from the theme.
+
+## FlyBay Submodule
+
+FlyBay is mounted as a repository submodule:
+
+```bash
+git submodule add git@github.com:debuginn/flyBay.git extensions/flybay
+```
+
+The example site mounts FlyBay's Hugo adapter, config, and public assets:
+
+```toml
+[module]
+  [[module.mounts]]
+    source = "../extensions/flybay/hugo/layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "../extensions/flybay/hugo/assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "../extensions/flybay/public"
+    target = "static/flybay"
+  [[module.mounts]]
+    source = "../extensions/flybay/config"
+    target = "data/flybay"
+```
+
+The FlyBay repo owns `hugo/layouts/partials/debuginn/extensions/flybay.html` and `hugo/assets/css/flybay-extension.css`. The theme only calls the module partial.
+
+## Development
+
+```bash
+cd exampleSite
+hugo server --themesDir ../.. --disableFastRender
+```

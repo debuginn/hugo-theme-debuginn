@@ -1,0 +1,34 @@
+baseURL = "https://example.org/"
+locale = "zh-CN"
+title = "DebugInn Theme Example"
+theme = "hugo-theme-debuginn"
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "A data-driven fullscreen personal homepage theme for Hugo."
+
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "../extensions/flybay/hugo/layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "../extensions/flybay/hugo/assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "../extensions/flybay/public"
+    target = "static/flybay"
+  [[module.mounts]]
+    source = "../extensions/flybay/config"
+    target = "data/flybay"

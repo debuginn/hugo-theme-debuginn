@@ -1,0 +1,12 @@
+{{- $module := .section.module | default .section.extension | default .section.id -}}
+{{- $extensions := .cfg.extensions | default dict -}}
+{{- $extension := index $extensions $module -}}
+{{- if and $module $extension $extension.enabled -}}
+  {{- $partial := $extension.partial | default (printf "debuginn/extensions/%s.html" $module) -}}
+  {{- $template := printf "partials/%s" $partial -}}
+  {{- if templates.Exists $template -}}
+    {{- partial $partial . -}}
+  {{- else -}}
+    {{- partial "sections/extension-missing.html" (dict "module" $module "section" .section) -}}
+  {{- end -}}
+{{- end -}}

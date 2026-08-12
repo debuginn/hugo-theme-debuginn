@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{- $cfg := partial "functions/site-config.html" . -}}
+{{- if not $cfg -}}
+<main class="debuginn-missing-config"><p>Missing DebugInn theme config. Add <code>data/site.json</code> or <code>params.debuginn</code>.</p></main>
+{{- else -}}
+{{- $first := index $cfg.sections 0 -}}
+{{- $last := index $cfg.sections (sub (len $cfg.sections) 1) -}}
+<main class="page-stack" data-debuginn-site data-first-section="{{ $first.id }}" data-last-section="{{ $last.id }}">
+  {{ partial "header.html" (dict "root" . "cfg" $cfg) }}
+  {{ range $cfg.sections }}
+    {{- if eq .type "home" -}}{{ partial "sections/home.html" (dict "root" $ "cfg" $cfg "section" .) }}
+    {{- else if or (eq .type "iassets") (eq .type "product") -}}{{ partial "sections/product.html" (dict "root" $ "cfg" $cfg "section" .) }}
+    {{- else if or (eq .type "extension") (eq .type "flybay") -}}{{ partial "sections/extension.html" (dict "root" $ "cfg" $cfg "section" .) }}
+    {{- else if eq .type "blog" -}}{{ partial "sections/blog.html" (dict "root" $ "cfg" $cfg "section" .) }}
+    {{- else if eq .type "social" -}}{{ partial "sections/social.html" (dict "root" $ "cfg" $cfg "section" .) }}
+    {{- end -}}
+  {{ end }}
+  {{ partial "footer.html" (dict "root" . "cfg" $cfg) }}
+  {{ with index $cfg.sections 1 }}<a class="global-page-down" href="#{{ .id }}" aria-label="跳转到下一页" data-page-down><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.95"/><path d="M8.2 10.4a.8.8 0 0 1 1.13 0L12 13.07l2.67-2.67a.8.8 0 1 1 1.13 1.13l-3.24 3.24a.8.8 0 0 1-1.13 0L8.2 11.53a.8.8 0 0 1 0-1.13Z" class="global-page-down-arrow"/></svg></a>{{ end }}
+  <nav class="page-dots" aria-label="Page sections" data-page-dots>{{ range $cfg.sections }}<a class="page-dot" href="#{{ .id }}" aria-label="{{ .dotLabel | default .id }}" data-section-dot="{{ .id }}"></a>{{ end }}</nav>
+</main>
+{{- end -}}
+{{ end }}

@@ -1,0 +1,3 @@
+---
+title: "DebugInn Theme Example"
+---
