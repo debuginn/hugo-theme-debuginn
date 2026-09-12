@@ -5,6 +5,21 @@
     "url": "https://debuginn.com",
     "description": "专注于前沿技术、算法分享、互联网、IT 前沿、优质网站推荐、Linux 技术，做一个爱分享的程序猿。",
     "copyrightStartYear": 2017,
+    "buildCredit": {
+      "prefix": "使用 ",
+      "label": "Hugo",
+      "href": "https://gohugo.io/",
+      "suffix": " 构建"
+    },
+    "themeCredit": {
+      "prefix": "主题 ",
+      "label": "DebugInn",
+      "href": "https://github.com/debuginn/hugo-theme-debuginn",
+      "byPrefix": " 由 ",
+      "byLabel": "Meng小羽",
+      "byHref": "https://blog.debuginn.com/about/",
+      "suffix": " 设计"
+    },
     "themeColor": "#0b1220",
     "assetOrigins": [
       "https://webp.debuginn.com"
@@ -69,8 +84,7 @@
     },
     "scrollToId": "iassets",
     "quoteApi": {
-      "endpoint": "https://v1.hitokoto.cn/?encode=json",
-      "linkBase": "https://hitokoto.cn/?id="
+      "endpoint": "https://v1.hitokoto.cn/?encode=json"
     },
     "backgrounds": [
       "https://webp.debuginn.com/202303120016035.jpeg",
@@ -368,7 +382,7 @@
         "href": "https://debuginn.com/wechat",
         "icon": "https://webp.debuginn.com/20260529XetLUr.svg",
         "qrImage": "https://webp.debuginn.com/20260529OjuRvn.jpg",
-        "followers": 1836
+        "followers": 1844
       },
       {
         "label": "微博",
@@ -380,25 +394,25 @@
         "label": "小红书",
         "href": "https://www.xiaohongshu.com/user/profile/5d4057fd0000000012007068",
         "icon": "https://webp.debuginn.com/202605290mdDFJ.svg",
-        "followers": 132
+        "followers": 153
       },
       {
         "label": "知乎",
         "href": "https://www.zhihu.com/people/debuginn",
         "icon": "https://webp.debuginn.com/202605290NgP60.svg",
-        "followers": 202
+        "followers": 206
       },
       {
         "label": "X",
         "href": "https://x.com/xdebuginn",
         "icon": "https://webp.debuginn.com/20260529dntbQO.svg",
-        "followers": 11
+        "followers": 12
       },
       {
         "label": "Telegram",
         "href": "https://t.me/xdebuginn",
         "icon": "https://webp.debuginn.com/2026052916fIxC.svg",
-        "followers": 49
+        "followers": 53
       },
       {
         "label": "Discord",
@@ -415,7 +429,8 @@
       {
         "label": "少数派",
         "href": "https://sspai.com/u/debuginn",
-        "icon": "https://webp.debuginn.com/20260731rgH7wK.png"
+        "icon": "https://webp.debuginn.com/20260731rgH7wK.png",
+        "preserveIconColor": true
       }
     ]
   },
