@@ -30,5 +30,8 @@ disableKinds = ["taxonomy", "term"]
     source = "../extensions/flybay/public"
     target = "static/flybay"
   [[module.mounts]]
+    source = "../extensions/flybay/hugo/static"
+    target = "static"
+  [[module.mounts]]
     source = "../extensions/flybay/config"
     target = "data/flybay"
