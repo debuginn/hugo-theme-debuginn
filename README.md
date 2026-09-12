@@ -18,6 +18,26 @@ theme = "hugo-theme-debuginn"
 
 The theme reads page data from `data/site.json` first, then `params.debuginn`.
 
+Optional `site.buildCredit` and `site.themeCredit` values are rendered inline
+after the copyright text:
+
+```json
+"buildCredit": {
+  "prefix": "使用 ", "label": "Hugo",
+  "href": "https://gohugo.io/", "suffix": " 构建"
+},
+"themeCredit": {
+  "prefix": "主题 ", "label": "DebugInn",
+  "href": "https://github.com/debuginn/hugo-theme-debuginn",
+  "byPrefix": " 由 ", "byLabel": "Meng小羽",
+  "byHref": "https://blog.debuginn.com/about/", "suffix": " 设计"
+}
+```
+
+Social links use white monochrome icons by default. Set `preserveIconColor: true`
+on a link to keep its image's original colors, for example for a logo with a
+solid background.
+
 ## Extension Modules
 
 A section can declare an external module:
@@ -26,7 +46,7 @@ A section can declare an external module:
 { "id": "flybay", "type": "extension", "module": "flybay" }
 ```
 
-The theme looks up `extensions.flybay` and renders the partial named by `partial`, defaulting to `debuginn/extensions/flybay.html`. That partial should come from the module repository, not from the theme.
+The theme looks up `extensions.flybay` and renders the partial named by `partial`, defaulting to `debuginn/extensions/flybay.html`. FlyBay's `codex-hugo-adapter` branch owns the Hugo presentation adapter alongside the module's configuration and public assets.
 
 ## FlyBay Submodule
 
@@ -36,7 +56,7 @@ FlyBay is mounted as a repository submodule:
 git submodule add git@github.com:debuginn/flyBay.git extensions/flybay
 ```
 
-The example site mounts FlyBay's Hugo adapter, config, and public assets:
+The example site mounts FlyBay's Hugo adapter, configuration, and public assets:
 
 ```toml
 [module]
@@ -50,11 +70,14 @@ The example site mounts FlyBay's Hugo adapter, config, and public assets:
     source = "../extensions/flybay/public"
     target = "static/flybay"
   [[module.mounts]]
+    source = "../extensions/flybay/hugo/static"
+    target = "static"
+  [[module.mounts]]
     source = "../extensions/flybay/config"
     target = "data/flybay"
 ```
 
-The FlyBay repo owns `hugo/layouts/partials/debuginn/extensions/flybay.html` and `hugo/assets/css/flybay-extension.css`. The theme only calls the module partial.
+Keep Hugo-specific integration on FlyBay's `codex-hugo-adapter` branch. Merge the latest FlyBay `preview` into that branch and run `npm run build:flybay` when synchronizing a newer FlyBay design.
 
 ## Development
 
