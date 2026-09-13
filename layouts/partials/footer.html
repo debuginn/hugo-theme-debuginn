@@ -2,9 +2,13 @@
   <div class="mastfoot mastfoot--light"><div class="inner">
     {{ with .cfg.home.photoCredit }}<p class="photo-credit" data-footer-photo>{{ .text }} <a href="{{ .linkHref }}">{{ .linkLabel }}</a>{{ .suffix }}</p>{{ end }}
     <p class="copyright-text" data-footer-copyright hidden>
-      © {{ .cfg.site.copyrightStartYear }}-{{ now.Format "2006" }} <a href="{{ .cfg.site.url }}">{{ .cfg.site.title }}</a>
-      {{- with .cfg.site.buildCredit }}<span class="footer-link-separator" aria-hidden="true"> · </span>{{ .prefix }}<a href="{{ .href }}" target="_blank" rel="noreferrer">{{ .label }}</a>{{ .suffix }}{{ end }}
-      {{- with .cfg.site.themeCredit }}<span class="footer-link-separator" aria-hidden="true"> · </span>{{ .prefix }}<a href="{{ .href }}" target="_blank" rel="noreferrer">{{ .label }}</a>{{ .byPrefix }}<a href="{{ .byHref }}" target="_blank" rel="noreferrer">{{ .byLabel }}</a>{{ .suffix }}{{ end }}
+      {{- with .cfg.site.footerCredit -}}
+        © {{ $.cfg.site.copyrightStartYear }}-{{ now.Format "2006" }} <a href="{{ $.cfg.site.url }}">{{ $.cfg.site.title }}</a>. {{ .builderPrefix }}<a href="{{ .builderHref }}" target="_blank" rel="noreferrer">{{ .builderLabel }}</a>{{ .themePrefix }}<a href="{{ .themeHref }}" target="_blank" rel="noreferrer">{{ .themeLabel }}</a>{{ .version }}{{ .designerPrefix }}<a href="{{ .designerHref }}" target="_blank" rel="noreferrer">{{ .designerLabel }}</a>{{ .suffix }}
+      {{- else -}}
+        © {{ $.cfg.site.copyrightStartYear }}-{{ now.Format "2006" }} <a href="{{ $.cfg.site.url }}">{{ $.cfg.site.title }}</a>
+        {{- with $.cfg.site.buildCredit }}<span class="footer-link-separator" aria-hidden="true"> · </span>{{ .prefix }}<a href="{{ .href }}" target="_blank" rel="noreferrer">{{ .label }}</a>{{ .suffix }}{{ end }}
+        {{- with $.cfg.site.themeCredit }}<span class="footer-link-separator" aria-hidden="true"> · </span>{{ .prefix }}<a href="{{ .href }}" target="_blank" rel="noreferrer">{{ .label }}</a>{{ .byPrefix }}<a href="{{ .byHref }}" target="_blank" rel="noreferrer">{{ .byLabel }}</a>{{ .suffix }}{{ end }}
+      {{- end }}
     </p>
   </div></div>
 </div>
