@@ -459,7 +459,7 @@ body {
 
 .section-rail {
   position: fixed;
-  left: max(18px, env(safe-area-inset-left));
+  right: max(18px, env(safe-area-inset-right));
   top: 50%;
   z-index: 21;
   display: flex;
@@ -575,7 +575,7 @@ body {
 
 .section-rail-tooltip {
   position: absolute;
-  left: calc(100% + 12px);
+  right: calc(100% + 12px);
   top: 50%;
   width: max-content;
   max-width: 160px;
@@ -591,7 +591,7 @@ body {
   line-height: 1;
   opacity: 0;
   pointer-events: none;
-  transform: translate(-4px, -50%);
+  transform: translate(4px, -50%);
   transition: opacity 160ms ease, transform 160ms ease;
   white-space: nowrap;
 }
