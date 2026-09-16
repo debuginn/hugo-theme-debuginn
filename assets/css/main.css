@@ -468,27 +468,13 @@ body {
   width: 58px;
   padding: 6px;
   overflow: visible;
-  border: 1px solid rgba(255, 255, 255, 0.48);
+  border: 1px solid #d7e3d8;
   border-radius: 26px;
-  background: rgba(246, 248, 246, 0.3);
+  background: #f7faf4;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.18),
-    0 10px 30px rgba(20, 32, 26, 0.12);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
+    inset 0 1px 0 #fff,
+    0 14px 38px rgba(14, 34, 24, 0.14);
   transform: translateY(-50%);
-  isolation: isolate;
-}
-
-.section-rail::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0.04) 48%, rgba(255, 255, 255, 0.18));
-  content: "";
-  pointer-events: none;
 }
 
 .section-rail-link {
@@ -515,9 +501,9 @@ body {
 }
 
 .section-rail-link:hover {
-  border-color: rgba(255, 255, 255, 0.42);
-  background: rgba(255, 255, 255, 0.26);
-  color: rgba(13, 31, 21, 0.96);
+  border-color: #d4ead9;
+  background: #e8f4ea;
+  color: #2f8f52;
 }
 
 .section-rail-link:active {
@@ -525,16 +511,16 @@ body {
 }
 
 .section-rail-link.is-active {
-  border-color: rgba(255, 255, 255, 0.68);
-  background: rgba(28, 88, 53, 0.9);
+  border-color: #2f8f52;
+  background: #2f8f52;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.32),
-    0 7px 16px rgba(28, 88, 53, 0.24);
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 7px 16px rgba(45, 112, 67, 0.24);
   color: #fff;
 }
 
 .section-rail-link:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.95);
+  outline: 2px solid #2f8f52;
   outline-offset: 2px;
 }
 
@@ -562,9 +548,9 @@ body {
   width: max-content;
   max-width: 160px;
   padding: 8px 11px;
-  border: 1px solid rgba(255, 255, 255, 0.64);
+  border: 1px solid #d7e3d8;
   border-radius: 12px;
-  background: rgba(250, 251, 250, 0.88);
+  background: #fff;
   box-shadow: 0 8px 24px rgba(18, 35, 26, 0.14);
   color: #12231a;
   font-size: 12px;
@@ -573,8 +559,6 @@ body {
   line-height: 1;
   opacity: 0;
   pointer-events: none;
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
   transform: translate(-4px, -50%);
   transition: opacity 160ms ease, transform 160ms ease;
   white-space: nowrap;
@@ -667,18 +651,10 @@ body {
   }
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .section-rail {
-    background: rgba(246, 248, 246, 0.92);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
-
 @media (prefers-contrast: more) {
   .section-rail {
-    border-color: rgba(18, 35, 26, 0.55);
-    background: rgba(250, 251, 250, 0.96);
+    border-color: #12231a;
+    background: #fff;
   }
 
   .section-rail-link {
