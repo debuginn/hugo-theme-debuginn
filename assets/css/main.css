@@ -750,10 +750,14 @@ body {
 }
 
 .page-dot {
+  display: block;
+  flex: 0 0 auto;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.38);
+  color: transparent;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.18s ease;
 }
@@ -767,6 +771,11 @@ body {
   background: rgba(255, 255, 255, 0.96);
 }
 
+.page-dot:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+}
+
 .page-dots--light .page-dot {
   background: rgba(28, 58, 42, 0.25);
 }
@@ -778,6 +787,10 @@ body {
 
 .page-dots--light .page-dot.is-active {
   background: rgba(28, 58, 42, 0.9);
+}
+
+.page-dots--light .page-dot:focus-visible {
+  outline-color: rgba(28, 58, 42, 0.9);
 }
 
 @media (max-width: 768px) {
