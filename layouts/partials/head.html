@@ -20,6 +20,26 @@
 <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="{{ $themeColor }}">
 {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- $sectionStyles := dict
+  "home" "css/sections/home.css"
+  "iassets" "css/sections/product.css"
+  "product" "css/sections/product.css"
+  "blog" "css/sections/blog.css"
+  "social" "css/sections/social.css"
+  "extension" "css/sections/extension.css"
+  "flybay" "css/sections/extension.css"
+-}}
+{{- $loadedSectionStyles := newScratch -}}
+{{- range $cfg.sections -}}
+  {{- $stylePath := index $sectionStyles .type -}}
+  {{- if and $stylePath (not ($loadedSectionStyles.Get $stylePath)) -}}
+    {{- with resources.Get $stylePath -}}
+      {{- $sectionCSS := . | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $sectionCSS.RelPermalink }}" integrity="{{ $sectionCSS.Data.Integrity }}" crossorigin="anonymous">
+    {{- end -}}
+    {{- $loadedSectionStyles.Set $stylePath true -}}
+  {{- end -}}
+{{- end -}}
 {{ range $name, $extension := $cfg.extensions }}
   {{- if and $extension.enabled $extension.styles -}}
     {{- range $extension.styles -}}
