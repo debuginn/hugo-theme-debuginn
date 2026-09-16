@@ -17,7 +17,7 @@
   {{ end }}
   {{ partial "footer.html" (dict "root" . "cfg" $cfg) }}
   {{ with index $cfg.sections 1 }}<a class="global-page-down" href="#{{ .id }}" aria-label="跳转到下一页" data-page-down><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.95"/><path d="M8.2 10.4a.8.8 0 0 1 1.13 0L12 13.07l2.67-2.67a.8.8 0 1 1 1.13 1.13l-3.24 3.24a.8.8 0 0 1-1.13 0L8.2 11.53a.8.8 0 0 1 0-1.13Z" class="global-page-down-arrow"/></svg></a>{{ end }}
-  <nav class="section-rail" aria-label="页面导航" data-section-rail>{{ range $cfg.sections }}<a class="section-rail-link" href="#{{ .id }}" aria-label="{{ .dotLabel | default .id }}" data-section-dot="{{ .id }}"><span class="section-rail-icon" aria-hidden="true">{{ partial "section-nav-icon.html" (.navIcon | default .type) }}</span><span class="section-rail-tooltip" aria-hidden="true">{{ .navLabel | default .id }}</span></a>{{ end }}</nav>
+  <nav class="section-rail" aria-label="页面导航" data-section-rail>{{ range $cfg.sections }}<a class="section-rail-link" href="#{{ .id }}" aria-label="{{ .dotLabel | default .id }}" data-section-dot="{{ .id }}" style="--section-accent: {{ .navAccent | default "#2f8f52" }}; --section-accent-text: {{ .navAccentText | default "#ffffff" }}"><span class="section-rail-icon" aria-hidden="true">{{ partial "section-nav-icon.html" (.navIcon | default .type) }}</span><span class="section-rail-tooltip" aria-hidden="true">{{ .navLabel | default .id }}</span></a>{{ end }}</nav>
   <nav class="page-dots" aria-label="Page sections" data-page-dots>{{ range $cfg.sections }}<a class="page-dot" href="#{{ .id }}" aria-label="{{ .dotLabel | default .id }}" data-section-dot="{{ .id }}"></a>{{ end }}</nav>
 </main>
 {{- end -}}
