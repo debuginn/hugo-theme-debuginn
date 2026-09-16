@@ -50,10 +50,11 @@ The theme looks up `extensions.flybay` and renders the partial named by `partial
 
 ## FlyBay Submodule
 
-FlyBay is mounted as a repository submodule:
+FlyBay is mounted as a pinned nested submodule. The relative URL keeps the
+parent clone protocol, so both SSH and HTTPS checkouts work recursively:
 
 ```bash
-git submodule add git@github.com:debuginn/flyBay.git extensions/flybay
+git submodule update --init --recursive
 ```
 
 The example site mounts FlyBay's Hugo adapter, configuration, and public assets:
@@ -77,7 +78,8 @@ The example site mounts FlyBay's Hugo adapter, configuration, and public assets:
     target = "data/flybay"
 ```
 
-Keep Hugo-specific integration on FlyBay's `codex-hugo-adapter` branch. Merge the latest FlyBay `preview` into that branch and run `npm run build:flybay` when synchronizing a newer FlyBay design.
+Make Hugo integration changes on a dedicated FlyBay feature branch and run
+`npm run build:flybay` before updating this theme's pinned FlyBay commit.
 
 ## Development
 
