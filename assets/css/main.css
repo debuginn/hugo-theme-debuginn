@@ -457,13 +457,158 @@ body {
   }
 }
 
+.section-rail {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  top: 50%;
+  z-index: 21;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 44px;
+  padding: 5px 0;
+  box-sizing: border-box;
+  overflow: visible;
+  border: 0;
+  border-radius: 22px;
+  background: rgba(248, 250, 247, 0.56);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 10px 28px rgba(14, 34, 24, 0.12);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  backdrop-filter: blur(20px) saturate(165%);
+  transform: translateY(-50%);
+  isolation: isolate;
+}
+
+.section-rail::before {
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: 21px;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0.22), transparent 46%, rgba(255, 255, 255, 0.08));
+  content: "";
+  pointer-events: none;
+}
+
+.section-rail-link {
+  --section-accent: #2f8f52;
+  --section-accent-text: #fff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 42px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 50%;
+  color: rgba(18, 35, 26, 0.7);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 100ms ease-out;
+}
+
+.section-rail-link:hover {
+  color: var(--section-accent);
+}
+
+.section-rail-link.is-active {
+  color: #fff;
+}
+
+.section-rail-link:focus-visible {
+  outline: none;
+}
+
+.section-rail-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  place-items: center;
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 100ms ease-out;
+}
+
+.section-rail-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.section-rail-link:hover .section-rail-icon {
+  border-color: color-mix(in srgb, var(--section-accent) 24%, transparent);
+  background: color-mix(in srgb, var(--section-accent) 12%, rgba(255, 255, 255, 0.72));
+}
+
+.section-rail-link.is-active .section-rail-icon {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: var(--section-accent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 5px 13px color-mix(in srgb, var(--section-accent) 34%, transparent);
+  color: var(--section-accent-text);
+}
+
+.section-rail-link:focus-visible .section-rail-icon {
+  outline: 2px solid var(--section-accent);
+  outline-offset: 2px;
+}
+
+.section-rail-link:active .section-rail-icon {
+  transform: scale(0.94);
+}
+
+.section-rail-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  width: max-content;
+  max-width: 160px;
+  padding: 8px 11px;
+  border: 1px solid #d7e3d8;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(18, 35, 26, 0.14);
+  color: #12231a;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(4px, -50%);
+  transition: opacity 160ms ease, transform 160ms ease;
+  white-space: nowrap;
+}
+
+.section-rail-link:hover .section-rail-tooltip,
+.section-rail-link:focus-visible .section-rail-tooltip {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
 .page-dots {
   position: fixed;
   right: 4px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 10px;
   padding: 8px 14px;
@@ -524,12 +669,44 @@ body {
 }
 
 @media (max-width: 768px) {
+  .section-rail {
+    display: none;
+  }
+
   .global-page-down {
     bottom: 56px;
   }
 
   .page-dots {
+    display: flex;
     right: 10px;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .section-rail {
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #12231a, 0 14px 38px rgba(14, 34, 24, 0.14);
+  }
+
+  .section-rail-link {
+    color: #12231a;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .section-rail {
+    background: #f7faf4;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-rail-link,
+  .section-rail-icon,
+  .section-rail-tooltip {
+    transition: none;
   }
 }
 
