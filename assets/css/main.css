@@ -466,19 +466,30 @@ body {
   flex-direction: column;
   gap: 4px;
   width: 44px;
-  padding: 4px 0;
+  padding: 5px 0;
   box-sizing: border-box;
   overflow: visible;
   border: 0;
   border-radius: 22px;
-  background: rgba(246, 248, 246, 0.42);
+  background: rgba(248, 250, 247, 0.56);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.36),
-    0 14px 38px rgba(14, 34, 24, 0.14);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 10px 28px rgba(14, 34, 24, 0.12);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  backdrop-filter: blur(20px) saturate(165%);
   transform: translateY(-50%);
+  isolation: isolate;
+}
+
+.section-rail::before {
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: 21px;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0.22), transparent 46%, rgba(255, 255, 255, 0.08));
+  content: "";
+  pointer-events: none;
 }
 
 .section-rail-link {
@@ -487,10 +498,10 @@ body {
   align-items: center;
   justify-content: center;
   width: 44px;
-  height: 44px;
+  height: 42px;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: 50%;
   color: rgba(18, 35, 26, 0.7);
   font-size: 12px;
@@ -506,44 +517,57 @@ body {
 }
 
 .section-rail-link:hover {
-  border-color: #d4ead9;
-  background: #e8f4ea;
   color: #2f8f52;
 }
 
-.section-rail-link:active {
-  transform: scale(0.97);
-}
-
 .section-rail-link.is-active {
-  border-color: #2f8f52;
-  background: #2f8f52;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    0 7px 16px rgba(45, 112, 67, 0.24);
   color: #fff;
 }
 
 .section-rail-link:focus-visible {
-  outline: 2px solid #2f8f52;
-  outline-offset: 2px;
+  outline: none;
 }
 
 .section-rail-icon {
   display: grid;
-  width: 20px;
-  height: 20px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid transparent;
+  border-radius: 50%;
   place-items: center;
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 100ms ease-out;
 }
 
 .section-rail-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.section-rail-link:hover .section-rail-icon {
+  border-color: rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.section-rail-link.is-active .section-rail-icon {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: #2f8f52;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 5px 13px rgba(45, 112, 67, 0.28);
+}
+
+.section-rail-link:focus-visible .section-rail-icon {
+  outline: 2px solid #2f8f52;
+  outline-offset: 2px;
+}
+
+.section-rail-link:active .section-rail-icon {
+  transform: scale(0.94);
 }
 
 .section-rail-tooltip {
@@ -677,6 +701,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .section-rail-link,
+  .section-rail-icon,
   .section-rail-tooltip {
     transition: none;
   }
