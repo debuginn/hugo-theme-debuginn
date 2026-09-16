@@ -39,32 +39,41 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(20, 28, 42, 0.38);
-  backdrop-filter: blur(12px) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(18, 31, 48, 0.28);
+  backdrop-filter: blur(18px) saturate(1.45);
+  -webkit-backdrop-filter: blur(18px) saturate(1.45);
+  border: 1px solid rgba(255, 255, 255, 0.38);
   color: #ffffff;
   line-height: 1;
   text-decoration: none !important;
-  transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  transition: background 180ms ease, border-color 180ms ease, transform 100ms ease-out, box-shadow 180ms ease;
   flex: none;
   position: relative;
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+    inset 0 1px 0 rgba(255, 255, 255, 0.52),
+    inset 0 -1px 0 rgba(8, 20, 34, 0.14),
+    0 8px 22px rgba(5, 13, 24, 0.24);
 }
 
 .social-btn:hover {
-  background: rgba(20, 28, 42, 0.52);
-  border-color: rgba(255, 255, 255, 0.42);
-  transform: translateY(-3px);
+  background: rgba(28, 46, 68, 0.4);
+  border-color: rgba(255, 255, 255, 0.62);
+  transform: translateY(-2px);
   color: #ffffff;
   text-decoration: none !important;
   box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.34),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.68),
+    inset 0 -1px 0 rgba(8, 20, 34, 0.12),
+    0 11px 28px rgba(5, 13, 24, 0.3);
+}
+
+.social-btn:active {
+  transform: scale(0.94);
+}
+
+.social-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.96);
+  outline-offset: 3px;
 }
 
 .social-btn-icon {
@@ -167,23 +176,23 @@
 }
 
 .social-btn--light {
-  background: rgba(20, 28, 42, 0.38);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(18, 31, 48, 0.28);
+  border-color: rgba(255, 255, 255, 0.38);
   color: #ffffff;
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+    inset 0 1px 0 rgba(255, 255, 255, 0.52),
+    inset 0 -1px 0 rgba(8, 20, 34, 0.14),
+    0 8px 22px rgba(5, 13, 24, 0.24);
 }
 
 .social-btn--light:hover {
-  background: rgba(20, 28, 42, 0.52);
-  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(28, 46, 68, 0.4);
+  border-color: rgba(255, 255, 255, 0.62);
   color: #ffffff;
   box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.34),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.68),
+    inset 0 -1px 0 rgba(8, 20, 34, 0.12),
+    0 11px 28px rgba(5, 13, 24, 0.3);
 }
 
 .social-btn--light .social-btn-icon {
@@ -222,14 +231,31 @@
   color: rgba(21, 33, 24, 0.85);
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .social-btn,
+  .social-btn--light {
+    background: #26364a;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-btn {
+    transition: none;
+  }
+}
+
 @media (max-width: 768px) {
   .social-page {
     padding: 88px 16px 72px;
   }
 
   .social-links {
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 338px;
   }
 
   .social-btn {
