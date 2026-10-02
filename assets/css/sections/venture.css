@@ -331,7 +331,7 @@
 
   .venture-shell {
     display: flex;
-    width: min(100% - 34px, 520px);
+    width: min(calc(100% - 34px), 520px);
     min-height: 100dvh;
     padding: calc(68px + env(safe-area-inset-top)) 0 calc(104px + env(safe-area-inset-bottom));
     flex-direction: column;
