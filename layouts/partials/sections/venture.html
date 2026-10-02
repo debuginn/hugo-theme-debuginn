@@ -1,33 +1,32 @@
 {{- $venture := .cfg.venture -}}
 <section class="page-screen page-screen-venture" id="{{ .section.id }}" data-section="{{ .section.id }}">
-  <div class="venture-atmosphere" aria-hidden="true">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="venture-atmosphere" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="venture-shell">
     <header class="venture-copy">
       <p class="venture-kicker"><span aria-hidden="true"></span>{{ $venture.kicker }}</p>
-      <h2>{{ $venture.title }}</h2>
+      <h2>{{ range $venture.titleLines }}<span>{{ . }}</span>{{ end }}</h2>
       <p class="venture-intro">{{ $venture.intro }}</p>
       {{ with $venture.note }}<p class="venture-note">{{ . }}</p>{{ end }}
     </header>
 
-    <div class="venture-map" aria-label="{{ $venture.mapLabel | default "创业项目" }}">
+    <div class="venture-map" aria-label="{{ $venture.mapLabel | default "职业与创业版图" }}">
       <div class="venture-orbit venture-orbit--outer" aria-hidden="true"></div>
       <div class="venture-orbit venture-orbit--inner" aria-hidden="true"></div>
-      <div class="venture-origin">
-        <span class="venture-origin-halo" aria-hidden="true"></span>
-        <span class="venture-origin-logo"><img src="{{ $venture.origin.logo }}" alt="{{ $venture.origin.name }}"></span>
-        <strong>{{ $venture.origin.name }}</strong>
-        <small>{{ $venture.origin.role }}</small>
+      <span class="venture-coordinate venture-coordinate--one" aria-hidden="true">01</span>
+      <span class="venture-coordinate venture-coordinate--two" aria-hidden="true">04</span>
+
+      <div class="venture-career">
+        <span class="venture-career-label">{{ $venture.career.label }}</span>
+        <span class="venture-career-mark" aria-hidden="true"><i></i><i></i></span>
+        <strong>{{ $venture.career.title }}</strong>
+        <p>{{ $venture.career.description }}</p>
+        <ul aria-label="专业方向">{{ range $venture.career.skills }}<li>{{ . }}</li>{{ end }}</ul>
       </div>
 
       {{ range $venture.projects }}
         <a class="venture-project venture-project--{{ .id }}" href="{{ .href }}" target="_blank" rel="noreferrer" style="--venture-accent: {{ .accent }}; --venture-glow: {{ .glow }}">
           <span class="venture-project-logo"><img src="{{ .logo }}" alt=""></span>
-          <span class="venture-project-copy">
-            <strong>{{ .name }}</strong>
-            <small>{{ .description }}</small>
-          </span>
+          <span class="venture-project-copy"><strong>{{ .name }}</strong><small>{{ .description }}</small></span>
           <span class="venture-project-arrow" aria-hidden="true">↗</span>
         </a>
       {{ end }}
