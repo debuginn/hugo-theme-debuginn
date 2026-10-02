@@ -1,0 +1,458 @@
+.page-screen-venture {
+  --venture-ink: #07131f;
+  --venture-paper: #f7fbff;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 78% 28%, rgba(41, 142, 196, 0.2), transparent 31%),
+    radial-gradient(circle at 64% 78%, rgba(76, 185, 144, 0.15), transparent 30%),
+    linear-gradient(138deg, #071019 0%, #0b1a28 54%, #10283a 100%);
+  color: var(--venture-paper);
+  isolation: isolate;
+}
+
+.page-screen-venture::before {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(90deg, transparent 4%, #000 38%, #000 100%);
+  content: "";
+}
+
+.venture-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.venture-atmosphere span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 0 18px rgba(153, 220, 255, 0.9);
+}
+
+.venture-atmosphere span:nth-child(1) { left: 55%; top: 19%; }
+.venture-atmosphere span:nth-child(2) { left: 82%; top: 72%; width: 3px; height: 3px; }
+.venture-atmosphere span:nth-child(3) { left: 43%; top: 81%; width: 2px; height: 2px; }
+
+.venture-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(600px, 1.28fr);
+  align-items: center;
+  gap: clamp(34px, 5vw, 88px);
+  width: min(1180px, calc(100% - 112px));
+  min-height: min(760px, calc(100dvh - 116px));
+  padding: 58px 0 82px;
+  box-sizing: border-box;
+}
+
+.venture-copy {
+  position: relative;
+  z-index: 3;
+  align-self: center;
+  max-width: 390px;
+  text-align: left;
+}
+
+.venture-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  color: rgba(219, 238, 251, 0.68);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+}
+
+.venture-kicker span {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, #74d6e8, rgba(116, 214, 232, 0.1));
+}
+
+.venture-copy h2 {
+  max-width: 9em;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(40px, 4.8vw, 68px);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.venture-intro {
+  max-width: 36em;
+  margin: 28px 0 0;
+  color: rgba(222, 237, 247, 0.72);
+  font-size: clamp(14px, 1.18vw, 17px);
+  line-height: 1.85;
+}
+
+.venture-note {
+  margin: 24px 0 0;
+  color: rgba(159, 205, 229, 0.65);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.venture-map {
+  position: relative;
+  width: min(100%, 690px);
+  height: 540px;
+  justify-self: end;
+}
+
+.venture-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(159, 210, 235, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-11deg);
+  pointer-events: none;
+}
+
+.venture-orbit::after {
+  position: absolute;
+  right: 12%;
+  top: 4%;
+  width: 7px;
+  height: 7px;
+  border: 2px solid #9ce7f1;
+  border-radius: 50%;
+  background: #0b1a28;
+  box-shadow: 0 0 20px rgba(89, 210, 229, 0.8);
+  content: "";
+}
+
+.venture-orbit--outer {
+  width: 92%;
+  height: 74%;
+}
+
+.venture-orbit--inner {
+  width: 62%;
+  height: 48%;
+  border-style: dashed;
+  transform: translate(-50%, -50%) rotate(18deg);
+}
+
+.venture-origin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 172px;
+  height: 172px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(238, 248, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 24px 70px rgba(0, 0, 0, 0.26);
+  transform: translate(-50%, -50%);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.venture-origin-halo {
+  position: absolute;
+  inset: -18px;
+  z-index: -1;
+  border: 1px solid rgba(114, 211, 230, 0.1);
+  border-radius: 50%;
+  box-shadow: 0 0 70px rgba(49, 157, 190, 0.14);
+}
+
+.venture-origin-logo {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  place-items: center;
+}
+
+.venture-origin-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.venture-origin strong {
+  margin-top: 12px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.venture-origin small {
+  margin-top: 3px;
+  color: rgba(211, 232, 245, 0.58);
+  font-size: 10px;
+}
+
+.venture-project {
+  --venture-accent: #72d3e6;
+  --venture-glow: rgba(114, 211, 230, 0.28);
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: 13px;
+  width: 250px;
+  min-height: 88px;
+  padding: 13px 14px;
+  box-sizing: border-box;
+  border: 1px solid color-mix(in srgb, var(--venture-accent) 34%, rgba(255, 255, 255, 0.08));
+  border-radius: 24px;
+  background: rgba(7, 20, 31, 0.76);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 44px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-decoration: none;
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.venture-project:hover,
+.venture-project:focus-visible {
+  border-color: color-mix(in srgb, var(--venture-accent) 78%, white 8%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13), 0 20px 54px var(--venture-glow);
+  color: #fff;
+  text-decoration: none;
+}
+
+.venture-project:focus-visible {
+  outline: 2px solid var(--venture-accent);
+  outline-offset: 4px;
+}
+
+.venture-project--iassets { left: 4%; top: 4%; transform: rotate(-2deg); }
+.venture-project--iassets:hover,
+.venture-project--iassets:focus-visible { transform: rotate(-2deg) translateY(-5px); }
+.venture-project--flybay { right: -1%; top: 34%; transform: rotate(1.5deg); }
+.venture-project--flybay:hover,
+.venture-project--flybay:focus-visible { transform: rotate(1.5deg) translateY(-5px); }
+.venture-project--plural { left: 7%; bottom: 3%; transform: rotate(1deg); }
+.venture-project--plural:hover,
+.venture-project--plural:focus-visible { transform: rotate(1deg) translateY(-5px); }
+
+.venture-project-logo {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  overflow: hidden;
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.96);
+  place-items: center;
+}
+
+.venture-project-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.venture-project--flybay .venture-project-logo img {
+  width: 94%;
+  height: auto;
+}
+
+.venture-project-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+
+.venture-project-copy strong {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.venture-project-copy small {
+  overflow: hidden;
+  color: rgba(214, 232, 243, 0.6);
+  font-size: 10px;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.venture-project-arrow {
+  color: var(--venture-accent);
+  font-size: 17px;
+  transition: transform 180ms ease;
+}
+
+.venture-project:hover .venture-project-arrow,
+.venture-project:focus-visible .venture-project-arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 980px) {
+  .venture-shell {
+    grid-template-columns: minmax(230px, 0.62fr) minmax(500px, 1.38fr);
+    gap: 18px;
+    width: calc(100% - 72px);
+  }
+
+  .venture-map { transform: scale(0.88); transform-origin: center right; }
+}
+
+@media (max-width: 768px) {
+  .page-screen-venture {
+    overflow-y: auto;
+    place-items: start center;
+  }
+
+  .page-screen-venture::before {
+    background-size: 38px 38px;
+    mask-image: linear-gradient(180deg, transparent, #000 24%, #000 100%);
+  }
+
+  .venture-shell {
+    display: flex;
+    width: min(100% - 34px, 520px);
+    min-height: 100dvh;
+    padding: calc(68px + env(safe-area-inset-top)) 0 calc(104px + env(safe-area-inset-bottom));
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .venture-copy {
+    max-width: none;
+  }
+
+  .venture-kicker { margin-bottom: 13px; }
+
+  .venture-copy h2 {
+    max-width: 10em;
+    font-size: clamp(34px, 10vw, 48px);
+    line-height: 1.08;
+  }
+
+  .venture-intro {
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .venture-note { display: none; }
+
+  .venture-map {
+    display: grid;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+    transform: none;
+  }
+
+  .venture-orbit { display: none; }
+
+  .venture-origin {
+    position: relative;
+    left: auto;
+    top: auto;
+    display: grid;
+    grid-template-columns: 50px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    justify-content: initial;
+    width: 100%;
+    height: auto;
+    min-height: 74px;
+    padding: 11px 15px;
+    box-sizing: border-box;
+    border-radius: 22px;
+    transform: none;
+  }
+
+  .venture-origin-halo { display: none; }
+
+  .venture-origin-logo {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
+
+  .venture-origin strong,
+  .venture-origin small {
+    grid-column: 2;
+    margin-left: 12px;
+    text-align: left;
+  }
+
+  .venture-origin strong { align-self: end; margin-top: 0; }
+  .venture-origin small { align-self: start; margin-top: 4px; }
+
+  .venture-project,
+  .venture-project--iassets,
+  .venture-project--flybay,
+  .venture-project--plural {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: 70px;
+    grid-template-columns: 46px minmax(0, 1fr) 20px;
+    padding: 10px 13px;
+    border-radius: 20px;
+    transform: none;
+  }
+
+  .venture-project:hover,
+  .venture-project:focus-visible,
+  .venture-project--iassets:hover,
+  .venture-project--iassets:focus-visible,
+  .venture-project--flybay:hover,
+  .venture-project--flybay:focus-visible,
+  .venture-project--plural:hover,
+  .venture-project--plural:focus-visible { transform: translateY(-2px); }
+
+  .venture-project-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-height: 720px) and (max-width: 768px) {
+  .venture-shell { gap: 18px; padding-top: calc(48px + env(safe-area-inset-top)); }
+  .venture-copy h2 { font-size: 31px; }
+  .venture-intro { display: none; }
+  .venture-origin { min-height: 64px; }
+  .venture-project { min-height: 62px; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .venture-origin,
+  .venture-project {
+    background: #0c2131;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venture-project,
+  .venture-project-arrow { transition: none; }
+}

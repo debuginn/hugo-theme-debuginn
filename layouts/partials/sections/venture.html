@@ -1,0 +1,36 @@
+{{- $venture := .cfg.venture -}}
+<section class="page-screen page-screen-venture" id="{{ .section.id }}" data-section="{{ .section.id }}">
+  <div class="venture-atmosphere" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="venture-shell">
+    <header class="venture-copy">
+      <p class="venture-kicker"><span aria-hidden="true"></span>{{ $venture.kicker }}</p>
+      <h2>{{ $venture.title }}</h2>
+      <p class="venture-intro">{{ $venture.intro }}</p>
+      {{ with $venture.note }}<p class="venture-note">{{ . }}</p>{{ end }}
+    </header>
+
+    <div class="venture-map" aria-label="{{ $venture.mapLabel | default "创业项目" }}">
+      <div class="venture-orbit venture-orbit--outer" aria-hidden="true"></div>
+      <div class="venture-orbit venture-orbit--inner" aria-hidden="true"></div>
+      <div class="venture-origin">
+        <span class="venture-origin-halo" aria-hidden="true"></span>
+        <span class="venture-origin-logo"><img src="{{ $venture.origin.logo }}" alt="{{ $venture.origin.name }}"></span>
+        <strong>{{ $venture.origin.name }}</strong>
+        <small>{{ $venture.origin.role }}</small>
+      </div>
+
+      {{ range $venture.projects }}
+        <a class="venture-project venture-project--{{ .id }}" href="{{ .href }}" target="_blank" rel="noreferrer" style="--venture-accent: {{ .accent }}; --venture-glow: {{ .glow }}">
+          <span class="venture-project-logo"><img src="{{ .logo }}" alt=""></span>
+          <span class="venture-project-copy">
+            <strong>{{ .name }}</strong>
+            <small>{{ .description }}</small>
+          </span>
+          <span class="venture-project-arrow" aria-hidden="true">↗</span>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
