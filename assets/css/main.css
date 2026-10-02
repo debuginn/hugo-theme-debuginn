@@ -180,6 +180,10 @@ body {
   background-color: var(--home-bg);
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   color: var(--text);
   overflow: hidden;
