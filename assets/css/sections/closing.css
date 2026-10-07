@@ -31,9 +31,10 @@
   top: var(--closing-y, 25%);
   width: var(--closing-width, 12%);
   margin: 0;
-  transform: translate(-50%, -50%) rotate(var(--closing-rotation, 0deg));
+  transform: translate(-50%, -50%) rotate(var(--closing-rotation, 0deg)) scale(var(--closing-lens-scale, 1));
   filter: blur(var(--closing-blur, 0px));
   opacity: 0.96;
+  transition: filter 160ms ease-out, transform 180ms ease-out;
 }
 
 .page-screen-closing .closing-item img {
@@ -355,6 +356,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page-screen-closing .closing-item {
+    transform: translate(-50%, -50%) rotate(var(--closing-rotation, 0deg));
+    transition: none;
+  }
+
   .page-screen-closing .closing-contact,
   .page-screen-closing .closing-wordmark-sheen {
     transition: none;

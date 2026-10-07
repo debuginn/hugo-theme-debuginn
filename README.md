@@ -64,8 +64,10 @@ Its content is configured independently:
 
 Item centers (`x`, `y`) and widths are percentages of the section; rotation is
 in degrees. Serve these assets from the site's static directory or an explicit
-Hugo static mount. Photos and logos share a circular depth-of-field effect
-around the contact button. The wordmark has a pointer-following dark iridescent
+Hugo static mount. Photos and logos share a subtle circular depth-of-field
+effect around the contact button. A nearby mouse or hovering pen brings them
+into focus and gently enlarges them; moving away restores their original state.
+The wordmark has a pointer-following dark iridescent
 sheen, supports touch, and respects reduced motion. Attribution reuses
 `site.footerCredit`, including the version supplied by the site build.
 
