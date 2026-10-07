@@ -9,6 +9,7 @@
   var footerPhoto=stack.querySelector('[data-footer-photo]');
   var footerCopyright=stack.querySelector('[data-footer-copyright]');
   var firstId=stack.getAttribute('data-first-section');
+  var hasClosing=sections.some(function(section){return section.hasAttribute('data-closing-section')});
   var currentTone='light';
   function applyTone(tone){
     currentTone=tone==='dark'?'dark':'light';
@@ -43,10 +44,12 @@
     var activeSection=sections[idx];
     var isSocial=!!(activeSection&&activeSection.hasAttribute('data-social-section'));
     var photoSection=id===firstId||isSocial;
+    var socialFooter=isSocial&&!hasClosing;
+    var footerSection=id===firstId||socialFooter;
     if(header) header.hidden=!photoSection;
-    if(footer) footer.hidden=!photoSection;
-    if(footerPhoto) footerPhoto.hidden=!photoSection;
-    if(footerCopyright) footerCopyright.hidden=!isSocial;
+    if(footer) footer.hidden=!footerSection;
+    if(footerPhoto) footerPhoto.hidden=!footerSection;
+    if(footerCopyright) footerCopyright.hidden=!socialFooter;
     if(id===firstId){setToneFromImage(stack.getAttribute('data-home-thumb')||'')}
     if(isSocial){setToneFromImage(stack.getAttribute('data-social-thumb')||'')}
     if(activeSection&&activeSection.hasAttribute('data-closing-section'))applyTone('dark');
