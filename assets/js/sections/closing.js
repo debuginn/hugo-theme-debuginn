@@ -161,7 +161,7 @@
         var distance = Math.hypot(dx, dy) / Math.hypot(bounds.width, bounds.height);
         // Photos and logos share one focal plane centred on the contact button.
         var depth = clamp((distance - 0.055) / 0.4, 0, 1);
-        var blur = Math.pow(depth, 1.15) * 2.4;
+        var blur = Math.pow(depth, 1.15) * 0.8;
         var rotation = parseFloat(window.getComputedStyle(item).getPropertyValue('--closing-rotation')) || 0;
         item.style.setProperty('--closing-blur', blur.toFixed(2) + 'px');
         item.style.setProperty('--closing-lens-scale', '1');
