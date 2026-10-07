@@ -37,6 +37,10 @@
   transition: filter 160ms ease-out, transform 180ms ease-out;
 }
 
+.page-screen-closing .closing-item[hidden] {
+  display: none;
+}
+
 .page-screen-closing .closing-item img {
   display: block;
   width: 100%;

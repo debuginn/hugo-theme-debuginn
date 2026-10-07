@@ -13,26 +13,27 @@
     }
   }
 
-  function randomizePhotos(section, items) {
+  function randomizePhotos(section, items, onChange) {
     var raw = section.getAttribute('data-closing-photo-pool');
-    if (!raw) return;
-    var pool;
+    var pool = [];
     try {
-      pool = JSON.parse(raw);
+      var parsed = raw && JSON.parse(raw);
+      if (Array.isArray(parsed)) pool = parsed;
     } catch (_) {
-      return;
+      // Invalid pools still use the configured photos, without duplicates.
     }
-    if (!Array.isArray(pool)) return;
 
     var seen = new Set();
-    var sources = pool.filter(function (source) {
-      if (typeof source !== 'string' || !source.trim()) return false;
-      var key = photoKey(source.trim());
-      if (seen.has(key)) return false;
+    function uniqueSource(source) {
+      if (typeof source !== 'string' || !source.trim()) return null;
+      var value = source.trim();
+      var key = photoKey(value);
+      if (seen.has(key)) return null;
       seen.add(key);
-      return true;
-    }).map(function (source) { return source.trim(); });
-    if (!sources.length) return;
+      return { src: value, key: key };
+    }
+
+    var sources = pool.map(uniqueSource).filter(Boolean);
 
     for (var index = sources.length - 1; index > 0; index -= 1) {
       var target = Math.floor(Math.random() * (index + 1));
@@ -43,28 +44,67 @@
 
     var photos = items.filter(function (item) {
       return item.classList.contains('closing-item--photo');
-    }).map(function (item) { return item.querySelector('img'); }).filter(Boolean);
-    var fallbacks = photos.map(function (image) { return image.getAttribute('src'); });
-    var used = new Set();
-
-    photos.forEach(function (image, index) {
-      var fallback = fallbacks[index];
-      var selected = sources[index];
-      if (!selected) {
-        selected = fallback && !used.has(photoKey(fallback)) ? fallback : fallbacks.find(function (source) {
-          return source && !used.has(photoKey(source));
-        });
-      }
-      selected = selected || fallback;
-      if (!selected) return;
-      used.add(photoKey(selected));
-      if (photoKey(selected) === photoKey(fallback)) return;
-
-      image.addEventListener('error', function () {
-        if (fallback) image.setAttribute('src', fallback);
-      }, { once: true });
-      image.setAttribute('src', selected);
+    }).map(function (item) {
+      return { item: item, image: item.querySelector('img'), assignment: null, cleanup: null };
+    }).filter(function (photo) { return photo.image; });
+    photos.forEach(function (photo) {
+      var fallback = uniqueSource(photo.image.getAttribute('src'));
+      if (fallback) sources.push(fallback);
     });
+
+    var cursor = 0;
+    var attempted = new Set();
+    var failed = new Set();
+    var reserved = new Map();
+
+    function reserveSource() {
+      while (cursor < sources.length) {
+        var source = sources[cursor];
+        cursor += 1;
+        if (attempted.has(source.key) || failed.has(source.key) || reserved.has(source.key)) continue;
+        var assignment = { src: source.src, key: source.key };
+        attempted.add(source.key);
+        reserved.set(source.key, assignment);
+        return assignment;
+      }
+      return null;
+    }
+
+    function activate(photo, assignment) {
+      if (photo.cleanup) photo.cleanup();
+      photo.cleanup = null;
+      photo.assignment = assignment;
+      photo.item.hidden = !assignment;
+      if (!assignment) {
+        photo.item.style.setProperty('--closing-lens-scale', '1');
+        onChange();
+        return;
+      }
+
+      var image = photo.image;
+      function checkFailure() {
+        if (photo.assignment !== assignment || photoKey(image.getAttribute('src')) !== assignment.key) return;
+        // A stale error for the previous src must not reject a pending or loaded image.
+        if (!image.complete || image.naturalWidth > 0) return;
+        failed.add(assignment.key);
+        if (reserved.get(assignment.key) === assignment) reserved.delete(assignment.key);
+        activate(photo, reserveSource());
+      }
+      function queueFailureCheck() {
+        Promise.resolve().then(checkFailure);
+      }
+
+      image.addEventListener('error', queueFailureCheck);
+      photo.cleanup = function () { image.removeEventListener('error', queueFailureCheck); };
+      if (photoKey(image.getAttribute('src')) !== assignment.key) image.setAttribute('src', assignment.src);
+      // Covers already-cached failures while preserving native lazy loading.
+      queueFailureCheck();
+      onChange();
+    }
+
+    // Reserve every initial slot before any cached load/error can replace a source.
+    photos.forEach(function (photo) { photo.assignment = reserveSource(); });
+    photos.forEach(function (photo) { activate(photo, photo.assignment); });
   }
 
   document.querySelectorAll('[data-closing-section]').forEach(function (section) {
@@ -87,7 +127,7 @@
     var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
 
     if (!page) return;
-    randomizePhotos(section, items);
+    randomizePhotos(section, items, requestMeasure);
 
     function measure() {
       measureFrame = 0;
@@ -112,7 +152,9 @@
       var focusX = focusBounds.left + focusBounds.width / 2;
       var focusY = focusBounds.top + focusBounds.height / 2;
 
-      itemMetrics = items.map(function (item) {
+      itemMetrics = items.filter(function (item) {
+        return !item.hidden && item.offsetWidth > 0 && item.offsetHeight > 0;
+      }).map(function (item) {
         var itemBounds = item.getBoundingClientRect();
         var dx = itemBounds.left + itemBounds.width / 2 - focusX;
         var dy = itemBounds.top + itemBounds.height / 2 - focusY;
@@ -170,6 +212,7 @@
       var innerRadius = 30;
 
       itemMetrics.forEach(function (metric) {
+        if (metric.item.hidden || !metric.width || !metric.height) return;
         var dx = x - metric.x;
         var dy = y - metric.y;
         // Measure against the original rotated tile, never its enlarged bounds.

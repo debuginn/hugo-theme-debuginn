@@ -66,13 +66,16 @@ Its content is configured independently:
 Item centers (`x`, `y`) and widths are percentages of the section; rotation is
 in degrees. Serve these assets from the site's static directory or an explicit
 Hugo static mount. The optional `photoPool` is an array of image paths: each page
-load shuffles the pool and assigns different photos before repeating any images.
+load shuffles the pool and assigns a distinct photo to each visible tile.
 Photo positions, widths, and rotation stay fixed, and logos keep their configured
 images. Photos use a fixed 4:3 frame with cover cropping to keep tile heights fixed.
-An absent or empty pool preserves the configured photos; a short pool fills the
-remaining tiles with their configured fallback photos, using different images
-where possible. If a selected photo fails to load, that tile retries its original
-`items[].src` once. The image elements retain native lazy loading and decoding.
+An absent or empty pool uses the distinct configured photos in their original
+order; a short pool fills the remaining tiles from unused configured photos.
+If a selected photo fails to load, that tile takes an unused, unfailed candidate
+from the pool or configured defaults. Each source is attempted at most once.
+When no distinct candidate remains, that tile is hidden rather than repeating a
+photo. The image elements retain native lazy loading and decoding. Uniqueness
+applies within the current page; refreshing may show photos from a previous visit.
 Photos and logos share a subtle circular depth-of-field
 effect around the contact button. A nearby mouse or hovering pen brings them
 into focus and gently enlarges them; moving away restores their original state.
