@@ -2,12 +2,17 @@
 {{- $credit := .cfg.site.footerCredit | default dict -}}
 {{- $label := $closing.contactLabel | default "与我联系" -}}
 {{- $wordmark := $closing.wordmark | default "DEBUGINN" -}}
-<section id="{{ .section.id }}" class="page-screen page-screen-closing" data-section data-closing-section aria-label="{{ .section.navLabel | default $label }}">
+{{- $photoPool := slice -}}
+{{- range $closing.photoPool -}}
+  {{- $photoPool = $photoPool | append (. | relURL) -}}
+{{- end -}}
+<section id="{{ .section.id }}" class="page-screen page-screen-closing" data-section data-closing-section{{ with $photoPool }} data-closing-photo-pool="{{ . | jsonify }}"{{ end }} aria-label="{{ .section.navLabel | default $label }}">
   <div class="closing-page">
     <div class="closing-collage" aria-hidden="true">
       {{- range $closing.items -}}
-      <div class="closing-item closing-item--{{ .type | default "photo" }}" data-closing-item style="--closing-x: {{ .x }}%; --closing-y: {{ .y }}%; --closing-width: {{ .width }}%; --closing-rotation: {{ .rotation | default 0 }}deg;">
-        <img src="{{ .src | relURL }}" alt="" loading="lazy" decoding="async">
+      {{- $kind := .type | default "photo" -}}
+      <div class="closing-item closing-item--{{ $kind }}" data-closing-item style="--closing-x: {{ .x }}%; --closing-y: {{ .y }}%; --closing-width: {{ .width }}%; --closing-rotation: {{ .rotation | default 0 }}deg;">
+        <img src="{{ .src | relURL }}" alt=""{{ if eq $kind "photo" }} width="720" height="540"{{ end }} loading="lazy" decoding="async">
       </div>
       {{- end -}}
     </div>

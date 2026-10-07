@@ -45,6 +45,8 @@
 }
 
 .page-screen-closing .closing-item--photo img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   border-radius: 9px;
   box-shadow: 0 16px 30px rgba(28, 28, 25, 0.12);
 }
@@ -233,16 +235,16 @@
   left: 50%;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  background: linear-gradient(112deg, #173438 0%, #111e39 18%, #382430 37%, #302a20 52%, #133127 69%, #25213c 87%, #173438 100%);
+  background: linear-gradient(112deg, #0b646c 0%, #193c7a 18%, #5c2864 36%, #682738 52%, #16594c 69%, #3a2b75 86%, #0b646c 100%);
   background-size: 160% 100%;
   background-position: var(--closing-ink-x) 50%;
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-mask-image: radial-gradient(ellipse 28% 140% at var(--closing-light-x) var(--closing-light-y), #000 0%, rgba(0, 0, 0, 0.9) 28%, rgba(0, 0, 0, 0.45) 65%, transparent 100%);
-  mask-image: radial-gradient(ellipse 28% 140% at var(--closing-light-x) var(--closing-light-y), #000 0%, rgba(0, 0, 0, 0.9) 28%, rgba(0, 0, 0, 0.45) 65%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 28% 140% at var(--closing-light-x) var(--closing-light-y), #000 0%, #000 36%, rgba(0, 0, 0, 0.58) 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse 28% 140% at var(--closing-light-x) var(--closing-light-y), #000 0%, #000 36%, rgba(0, 0, 0, 0.58) 70%, transparent 100%);
   opacity: var(--closing-sheen-opacity);
   transform: translateX(-50%) scaleX(var(--closing-wordmark-stretch));
-  transition: opacity 430ms ease-out;
+  transition: opacity 300ms ease-out;
   pointer-events: none;
 }
 

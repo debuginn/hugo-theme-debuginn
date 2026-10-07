@@ -55,6 +55,7 @@ Its content is configured independently:
   "logo": "/closing/logo.webp",
   "logoHref": "/",
   "wordmark": "DEBUGINN",
+  "photoPool": ["/closing/photos/01.webp", "/closing/photos/02.webp"],
   "items": [
     { "type": "photo", "src": "/closing/photo.webp", "x": 18, "y": 15, "width": 15, "rotation": 8 },
     { "type": "logo", "src": "/closing/project.webp", "x": 70, "y": 17, "width": 6, "rotation": -8 }
@@ -64,7 +65,15 @@ Its content is configured independently:
 
 Item centers (`x`, `y`) and widths are percentages of the section; rotation is
 in degrees. Serve these assets from the site's static directory or an explicit
-Hugo static mount. Photos and logos share a subtle circular depth-of-field
+Hugo static mount. The optional `photoPool` is an array of image paths: each page
+load shuffles the pool and assigns different photos before repeating any images.
+Photo positions, widths, and rotation stay fixed, and logos keep their configured
+images. Photos use a fixed 4:3 frame with cover cropping to keep tile heights fixed.
+An absent or empty pool preserves the configured photos; a short pool fills the
+remaining tiles with their configured fallback photos, using different images
+where possible. If a selected photo fails to load, that tile retries its original
+`items[].src` once. The image elements retain native lazy loading and decoding.
+Photos and logos share a subtle circular depth-of-field
 effect around the contact button. A nearby mouse or hovering pen brings them
 into focus and gently enlarges them; moving away restores their original state.
 The wordmark has a pointer-following dark iridescent

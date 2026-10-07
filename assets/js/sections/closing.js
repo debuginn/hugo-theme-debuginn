@@ -5,6 +5,68 @@
     return Math.min(max, Math.max(min, value));
   }
 
+  function photoKey(source) {
+    try {
+      return new URL(source, document.baseURI).href;
+    } catch (_) {
+      return source;
+    }
+  }
+
+  function randomizePhotos(section, items) {
+    var raw = section.getAttribute('data-closing-photo-pool');
+    if (!raw) return;
+    var pool;
+    try {
+      pool = JSON.parse(raw);
+    } catch (_) {
+      return;
+    }
+    if (!Array.isArray(pool)) return;
+
+    var seen = new Set();
+    var sources = pool.filter(function (source) {
+      if (typeof source !== 'string' || !source.trim()) return false;
+      var key = photoKey(source.trim());
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).map(function (source) { return source.trim(); });
+    if (!sources.length) return;
+
+    for (var index = sources.length - 1; index > 0; index -= 1) {
+      var target = Math.floor(Math.random() * (index + 1));
+      var swapped = sources[index];
+      sources[index] = sources[target];
+      sources[target] = swapped;
+    }
+
+    var photos = items.filter(function (item) {
+      return item.classList.contains('closing-item--photo');
+    }).map(function (item) { return item.querySelector('img'); }).filter(Boolean);
+    var fallbacks = photos.map(function (image) { return image.getAttribute('src'); });
+    var used = new Set();
+
+    photos.forEach(function (image, index) {
+      var fallback = fallbacks[index];
+      var selected = sources[index];
+      if (!selected) {
+        selected = fallback && !used.has(photoKey(fallback)) ? fallback : fallbacks.find(function (source) {
+          return source && !used.has(photoKey(source));
+        });
+      }
+      selected = selected || fallback;
+      if (!selected) return;
+      used.add(photoKey(selected));
+      if (photoKey(selected) === photoKey(fallback)) return;
+
+      image.addEventListener('error', function () {
+        if (fallback) image.setAttribute('src', fallback);
+      }, { once: true });
+      image.setAttribute('src', selected);
+    });
+  }
+
   document.querySelectorAll('[data-closing-section]').forEach(function (section) {
     if (section.dataset.closingInitialized === 'true') return;
     section.dataset.closingInitialized = 'true';
@@ -25,6 +87,7 @@
     var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
 
     if (!page) return;
+    randomizePhotos(section, items);
 
     function measure() {
       measureFrame = 0;
@@ -89,7 +152,7 @@
 
     items.forEach(function (item) {
       var image = item.querySelector('img');
-      if (image && !image.complete) image.addEventListener('load', requestMeasure, { once: true });
+      if (image) image.addEventListener('load', requestMeasure);
     });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(requestMeasure);
 
@@ -171,7 +234,7 @@
       wordmark.style.setProperty('--closing-light-x', x.toFixed(2) + '%');
       wordmark.style.setProperty('--closing-light-y', y.toFixed(2) + '%');
       wordmark.style.setProperty('--closing-ink-x', (20 + x * 0.6).toFixed(2) + '%');
-      wordmark.style.setProperty('--closing-sheen-opacity', '0.94');
+      wordmark.style.setProperty('--closing-sheen-opacity', '1');
     }
 
     function updatePointer(event) {
