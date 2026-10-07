@@ -312,6 +312,11 @@ body {
   border-bottom-color: rgba(16, 25, 18, 0.95);
 }
 
+[data-site-header][hidden],
+[data-site-footer][hidden] {
+  display: none !important;
+}
+
 .global-footer {
   position: fixed;
   left: 0;

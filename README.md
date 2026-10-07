@@ -38,6 +38,40 @@ Social links use white monochrome icons by default. Set `preserveIconColor: true
 on a link to keep its image's original colors, for example for a logo with a
 solid background.
 
+## Closing Section
+
+Add a separate final section without replacing the social section:
+
+```json
+{ "id": "closing", "type": "closing", "navIcon": "contact", "navLabel": "与我联系" }
+```
+
+Its content is configured independently:
+
+```json
+"closing": {
+  "contactLabel": "与我联系",
+  "contactHref": "mailto:hello@example.com",
+  "logo": "/closing/logo.webp",
+  "logoHref": "/",
+  "wordmark": "DEBUGINN",
+  "items": [
+    { "type": "photo", "src": "/closing/photo.webp", "x": 18, "y": 15, "width": 15, "rotation": 8 },
+    { "type": "logo", "src": "/closing/project.webp", "x": 70, "y": 17, "width": 6, "rotation": -8 }
+  ]
+}
+```
+
+Item centers (`x`, `y`) and widths are percentages of the section; rotation is
+in degrees. Serve these assets from the site's static directory or an explicit
+Hugo static mount. Photos and logos share a circular depth-of-field effect
+around the contact button. The wordmark has a pointer-following dark iridescent
+sheen, supports touch, and respects reduced motion. Attribution reuses
+`site.footerCredit`, including the version supplied by the site build.
+
+CSS and JavaScript are loaded only when a closing section is configured, and
+all presentation rules are scoped to that section.
+
 ## Extension Modules
 
 A section can declare an external module:

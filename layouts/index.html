@@ -13,6 +13,7 @@
     {{- else if or (eq .type "extension") (eq .type "flybay") -}}{{ partial "sections/extension.html" (dict "root" $ "cfg" $cfg "section" .) }}
     {{- else if eq .type "blog" -}}{{ partial "sections/blog.html" (dict "root" $ "cfg" $cfg "section" .) }}
     {{- else if eq .type "social" -}}{{ partial "sections/social.html" (dict "root" $ "cfg" $cfg "section" .) }}
+    {{- else if eq .type "closing" -}}{{ partial "sections/closing.html" (dict "root" $ "cfg" $cfg "section" .) }}
     {{- end -}}
   {{ end }}
   {{ partial "footer.html" (dict "root" . "cfg" $cfg) }}
