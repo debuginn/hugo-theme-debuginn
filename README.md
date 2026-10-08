@@ -101,8 +101,8 @@ active while moving to a link. Desktop logo clicks do not toggle or scale it;
 touch uses tap to open or close. The closed state has no caption by default;
 optional `closedLabel` and `touchLabel` values can supply one. Moving
 outside the fan, clicking blank space or pressing Escape dismisses the links.
-The logo artwork fills the circular trigger without padding, with a small fixed
-zoom to reduce the source image's whitespace while keeping the complete mark.
+The logo sits on a white circular surface, with a small inner inset to give the
+complete mark breathing room on desktop and touch screens.
 Two blue and teal light arcs rotate in opposite directions around its edge at
 different speeds while this section is visible. Hover strengthens the glow;
 opening the contacts softens the outer arc for legibility. The halo does not
