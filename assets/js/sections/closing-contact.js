@@ -42,6 +42,7 @@
       var hint = hub.querySelector('.hub-hint');
       if (!trigger || !options) return;
       hub.dataset.closingContactInitialized = 'true';
+      trigger.setAttribute('tabindex', '0');
 
       var nodes = Array.from(options.querySelectorAll('.contact-node')).map(function (element, index) {
         return {
@@ -69,6 +70,7 @@
       var lastPointerType = '';
       var hoverActive = false;
       var frame = 0;
+      var focusFrame = 0;
       var lastFrame = 0;
       var dialogs = Array.from(section.querySelectorAll('[data-closing-dialog]'));
 
@@ -189,6 +191,8 @@
       }
 
       function setExpanded(next, restoreFocus) {
+        if (focusFrame) window.cancelAnimationFrame(focusFrame);
+        focusFrame = 0;
         if (next === expanded) return;
         if (!next && (restoreFocus || options.contains(document.activeElement))) {
           if (sectionVisible) trigger.focus({ preventScroll: true });
@@ -232,11 +236,19 @@
         if (!hoverActive || event.pointerType === 'touch' || section.querySelector('dialog[open]')) return;
         setExpanded(false, false);
       });
-      hub.addEventListener('focusout', function () {
-        Promise.resolve().then(function () {
+      hub.addEventListener('focusout', function (event) {
+        if (hub.contains(event.relatedTarget)) return;
+        if (focusFrame) window.cancelAnimationFrame(focusFrame);
+        focusFrame = window.requestAnimationFrame(function () {
+          focusFrame = 0;
+          if (!sectionVisible || !expanded) return;
           if (hub.contains(document.activeElement) || section.querySelector('dialog[open]') || (hoverActive && hub.matches(':hover'))) return;
           setExpanded(false, false);
         });
+      });
+      hub.addEventListener('focusin', function () {
+        if (focusFrame) window.cancelAnimationFrame(focusFrame);
+        focusFrame = 0;
       });
       section.addEventListener('pointermove', function (event) {
         if (!expanded || !hoverActive || event.pointerType === 'touch' || hub.contains(event.target) || section.querySelector('dialog[open]')) return;
