@@ -43,8 +43,9 @@ solid background.
 The circular control below the right navigation switches between light and dark
 appearance. It follows the system until the visitor makes a choice, saves that
 choice as `debuginn-theme`, and synchronizes it between tabs. The initial
-`html[data-theme]` value is applied before stylesheets load. On touch screens,
-the section dots remain visible and the switch sits above them.
+`html[data-theme]` value is applied before stylesheets load. On phones and compact
+touch screens, only the section dots are shown; the desktop navigation and
+appearance switch are hidden.
 
 Each section owns its palette. Embedded modules use the resolved root attribute
 without adding their own storage or theme controller. A section can set
@@ -126,9 +127,8 @@ from the pool or configured defaults. Each source is attempted at most once.
 When no distinct candidate remains, that tile is hidden rather than repeating a
 photo. The image elements retain native lazy loading and decoding. Uniqueness
 applies within the current page; refreshing may show photos from a previous visit.
-Photos and logos share a subtle circular depth-of-field
-effect around the contact button or central logo. A nearby mouse or hovering pen brings them
-into focus and gently enlarges them; moving away restores their original state.
+Photos and logos stay sharp at every distance from the central logo. A nearby
+mouse or hovering pen gently enlarges them; moving away restores their original size.
 The wordmark has a pointer-following dark iridescent
 sheen, supports touch, and respects reduced motion. Attribution reuses
 `site.footerCredit`, including the version supplied by the site build.

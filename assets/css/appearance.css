@@ -42,17 +42,7 @@
 }
 :root[data-theme="dark"] .section-rail-link:focus-visible .section-rail-icon { outline-color: var(--section-accent-dark, #a4bdff); }
 @media (max-width: 768px), (max-width: 1024px) and (hover: none) and (pointer: coarse) {
-  .section-rail {
-    display: flex;
-    top: calc(50% - 114px);
-    right: max(18px, env(safe-area-inset-right));
-    gap: 0;
-    padding: 0;
-    border-radius: 50%;
-  }
-  .section-rail [data-section-dot], .section-rail-divider { display: none; }
-  .appearance-toggle { width: 44px; height: 44px; border-radius: 50%; }
-  .appearance-toggle .section-rail-icon { width: 44px; height: 44px; background: transparent; border: none; }
+  .section-rail { display: none; }
   .page-dots { display: flex; right: 10px; }
 }
 @media (min-width: 769px) and (max-height: 560px) and (hover: hover) {

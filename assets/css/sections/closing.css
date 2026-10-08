@@ -69,9 +69,8 @@ html[data-theme="dark"] .page-screen.page-screen-closing {
   width: var(--closing-width, 12%);
   margin: 0;
   transform: translate(-50%, -50%) rotate(var(--closing-rotation, 0deg)) scale(var(--closing-lens-scale, 1));
-  filter: blur(var(--closing-blur, 0px));
   opacity: 0.96;
-  transition: filter 160ms ease-out, transform 180ms ease-out;
+  transition: transform 180ms ease-out;
 }
 
 .page-screen-closing .closing-item[hidden] {
@@ -584,8 +583,6 @@ html[data-theme="dark"] .page-screen-closing .contact-node-icon img {
 
 .page-screen-closing .closing-qr-dialog::backdrop {
   background: var(--closing-backdrop);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
 }
 
 .page-screen-closing .closing-qr-dialog h2 {
@@ -780,13 +777,6 @@ html[data-theme="dark"] .page-screen-closing .contact-node-icon img {
   .page-screen-closing .contact-node-icon svg,
   .page-screen-closing .contact-node-icon img { width: 22px; height: 22px; }
   .page-screen-closing .hub-hint { top: calc(100% + 10px); }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .page-screen-closing .closing-qr-dialog::backdrop {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
 }
 
 @media (min-width: 721px) and (max-height: 480px) {
