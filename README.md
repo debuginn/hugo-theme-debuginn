@@ -101,9 +101,10 @@ active while moving to a link. Desktop logo clicks do not toggle or scale it;
 touch uses tap to open or close. The closed state has no caption by default;
 optional `closedLabel` and `touchLabel` values can supply one. Moving
 outside the fan, clicking blank space or pressing Escape dismisses the links.
-The logo artwork is clipped to a circle. A small three-dot thought bubble above
-it animates while this section is visible and the fan is closed. Opening the fan
-hides and pauses the dots; reduced motion keeps them static.
+The logo artwork fills the circular trigger without padding. A blue and teal
+light arc rotates around its edge while this section is visible, and becomes
+brighter on hover. It does not intercept pointer input; leaving the section
+pauses the rotation, and reduced motion keeps the halo static.
 Escape closes an open QR dialog first. Closing returns
 keyboard focus, leaving the section collapses the links, and reduced motion
 uses immediate state changes. If orbit mode is absent or contains no usable

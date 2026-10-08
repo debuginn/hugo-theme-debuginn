@@ -313,6 +313,9 @@ html[data-theme="dark"] .page-screen-closing .closing-item--logo.closing-item--m
 
 .page-screen-closing .contact-hub {
   --contact-radius: 142px;
+  --hub-aura-tail: rgba(36, 158, 187, .18);
+  --hub-aura-blue: #278ca9;
+  --hub-aura-hot: #57cec6;
   position: absolute;
   top: var(--closing-hub-y, 50%);
   left: var(--closing-hub-x, 50%);
@@ -330,8 +333,8 @@ html[data-theme="dark"] .page-screen-closing .closing-item--logo.closing-item--m
   -webkit-appearance: none;
   box-sizing: border-box;
   margin: 0;
-  padding: 29px;
-  border: 1px solid var(--closing-edge);
+  padding: 0;
+  border: 0;
   border-radius: 50%;
   background: linear-gradient(145deg, var(--closing-surface) 10%, var(--closing-raised) 55%, var(--closing-pressed));
   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.13), 0 14px 38px var(--closing-shadow), 0 3px 8px var(--closing-shadow);
@@ -342,25 +345,11 @@ html[data-theme="dark"] .page-screen-closing .closing-item--logo.closing-item--m
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   transition: box-shadow 180ms ease;
-}
-
-.page-screen-closing .hub-trigger::after {
-  content: "";
-  position: absolute;
-  inset: -7px;
-  border: 1px solid var(--closing-edge);
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 200ms ease;
+  isolation: isolate;
 }
 
 .page-screen-closing .hub-trigger:hover {
   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.13), 0 17px 48px var(--closing-shadow), 0 3px 8px var(--closing-shadow);
-}
-
-.page-screen-closing .hub-trigger:hover::after,
-.page-screen-closing .hub-trigger[aria-expanded="true"]::after {
-  opacity: 1;
 }
 
 .page-screen-closing .hub-trigger:focus-visible {
@@ -368,6 +357,8 @@ html[data-theme="dark"] .page-screen-closing .closing-item--logo.closing-item--m
 }
 
 .page-screen-closing .hub-logo {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,7 +372,7 @@ html[data-theme="dark"] .page-screen-closing .closing-item--logo.closing-item--m
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
 }
 
@@ -399,58 +390,49 @@ html[data-theme="dark"] .page-screen-closing .closing-item--logo.closing-item--m
 
 .page-screen-closing .contact-hub.is-open .contact-bridge { pointer-events: auto; }
 
-.page-screen-closing .hub-cue {
+.page-screen-closing .hub-aura {
   position: absolute;
-  top: -32px;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 48px;
-  height: 26px;
-  box-sizing: border-box;
-  border: 1px solid var(--closing-edge);
-  border-radius: 14px;
-  background: var(--closing-surface);
-  box-shadow: 0 3px 10px var(--closing-shadow);
-  color: var(--closing-muted);
-  transform: translateX(-50%);
-  transition: opacity 160ms ease, transform 160ms ease;
+  inset: -10px;
+  z-index: 0;
+  border-radius: 50%;
+  opacity: .8;
+  transition: opacity 180ms ease;
   pointer-events: none;
 }
 
-.page-screen-closing .hub-cue::before,
-.page-screen-closing .hub-cue::after {
+.page-screen-closing .hub-aura-orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  animation: closing-aura-orbit 6800ms linear infinite;
+  animation-play-state: paused;
+  filter: drop-shadow(0 0 5px var(--hub-aura-blue));
+  pointer-events: none;
+}
+
+.page-screen-closing .hub-aura-orbit::after {
   content: "";
   position: absolute;
-  border: 1px solid var(--closing-edge);
-  border-radius: 50%;
-  background: var(--closing-surface);
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, transparent 0deg 208deg, var(--hub-aura-tail) 258deg, var(--hub-aura-blue) 300deg, var(--hub-aura-hot) 326deg, transparent 355deg);
+  -webkit-mask-image: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  mask-image: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
 }
 
-.page-screen-closing .hub-cue::before { width: 5px; height: 5px; bottom: -7px; left: calc(50% - 2px); }
-.page-screen-closing .hub-cue::after { width: 2px; height: 2px; bottom: -11px; left: calc(50% + 4px); }
+.page-screen-closing .hub-trigger:hover .hub-aura,
+.page-screen-closing .contact-hub.is-open .hub-aura { opacity: 1; }
 
-.page-screen-closing .hub-cue-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: .4;
-  animation: closing-thinking-dot 1400ms ease-in-out infinite;
-  animation-play-state: paused;
+.page-screen-closing .contact-hub.is-contact-visible .hub-aura-orbit { animation-play-state: running; }
+
+html[data-theme="dark"] .page-screen-closing .contact-hub {
+  --hub-aura-tail: rgba(71, 196, 220, .22);
+  --hub-aura-blue: #44b6df;
+  --hub-aura-hot: #9aeadd;
 }
 
-.page-screen-closing .hub-cue-dot:nth-child(2) { animation-delay: 140ms; }
-.page-screen-closing .hub-cue-dot:nth-child(3) { animation-delay: 280ms; }
-
-.page-screen-closing .contact-hub.is-contact-visible:not(.is-open) .hub-cue-dot { animation-play-state: running; }
-.page-screen-closing .contact-hub.is-open .hub-cue { opacity: 0; transform: translate(-50%, -3px); }
-
-@keyframes closing-thinking-dot {
-  0%, 60%, 100% { transform: translateY(0); opacity: .4; }
-  30% { transform: translateY(-3px); opacity: .95; }
+@keyframes closing-aura-orbit {
+  to { transform: rotate(1turn); }
 }
 
 .page-screen-closing .contact-options {
@@ -662,12 +644,11 @@ html[data-theme="dark"] .page-screen-closing .contact-node-icon img {
     height: 96px;
   }
 
-  .page-screen-closing .hub-trigger { padding: 20px; }
   .page-screen-closing .contact-node { width: 64px; min-height: 70px; gap: 7px; font-size: 12px; }
   .page-screen-closing .contact-node-icon { width: 50px; height: 50px; }
   .page-screen-closing .contact-node-icon svg,
   .page-screen-closing .contact-node-icon img { width: 23px; height: 23px; }
-  .page-screen-closing .hub-cue { top: -30px; width: 42px; height: 24px; gap: 4px; }
+  .page-screen-closing .hub-aura { inset: -8px; }
   .page-screen-closing .hub-hint { top: calc(100% + 13px); font-size: 13px; }
 
   .page-screen-closing[data-closing-contact-mode="orbit"] .closing-collage {
@@ -736,14 +717,12 @@ html[data-theme="dark"] .page-screen-closing .contact-node-icon img {
 @media (max-width: 720px) and (max-height: 660px) {
   .page-screen-closing[data-closing-contact-mode="orbit"] .closing-page { --closing-hub-y: 48%; }
   .page-screen-closing .contact-hub { width: 88px; height: 88px; }
-  .page-screen-closing .hub-trigger { padding: 19px; }
   .page-screen-closing .hub-hint { top: calc(100% + 10px); }
 }
 
 @media (min-width: 721px) and (max-height: 700px) {
   .page-screen-closing[data-closing-contact-mode="orbit"] .closing-page { --closing-hub-y: 40%; }
   .page-screen-closing .contact-hub { --contact-radius: 116px; width: 100px; height: 100px; }
-  .page-screen-closing .hub-trigger { padding: 22px; }
   .page-screen-closing .contact-node-icon { width: 54px; height: 54px; }
   .page-screen-closing .contact-node { min-height: 76px; }
   .page-screen-closing .hub-hint { top: calc(100% + 10px); font-size: 13px; }
@@ -780,7 +759,6 @@ html[data-theme="dark"] .page-screen-closing .contact-node-icon img {
 @media (max-height: 480px) {
   .page-screen-closing[data-closing-contact-mode="orbit"] .closing-page { --closing-hub-y: 40%; }
   .page-screen-closing .contact-hub { --contact-radius: 82px; width: 78px; height: 78px; }
-  .page-screen-closing .hub-trigger { padding: 17px; }
   .page-screen-closing .contact-node { width: 62px; min-height: 66px; gap: 6px; font-size: 11px; }
   .page-screen-closing .contact-node-icon { width: 44px; height: 44px; }
   .page-screen-closing .contact-node-icon svg,
@@ -836,11 +814,10 @@ html[data-theme="dark"] .page-screen-closing .contact-node-icon img {
   .page-screen-closing .closing-contact,
   .page-screen-closing .closing-wordmark-sheen,
   .page-screen-closing .hub-trigger,
-  .page-screen-closing .hub-trigger::after,
   .page-screen-closing .contact-node-icon,
-  .page-screen-closing .hub-cue {
+  .page-screen-closing .hub-aura {
     transition: none;
   }
 
-  .page-screen-closing .hub-cue-dot { animation: none; transform: none; opacity: .6; }
+  .page-screen-closing .hub-aura-orbit { animation: none; transform: rotate(35deg); }
 }
