@@ -28,7 +28,7 @@
     <div class="contact-hub" data-closing-contact-hub>
       <div class="contact-bridge" aria-hidden="true"></div>
       <button class="hub-trigger" type="button" aria-label="展开联系方式" aria-expanded="false" aria-controls="{{ $optionsID }}" data-closing-focus>
-        <span class="hub-aura" aria-hidden="true"><span class="hub-aura-orbit"></span></span>
+        <span class="hub-aura" aria-hidden="true"><span class="hub-aura-orbit"></span><span class="hub-aura-orbit hub-aura-orbit--outer"></span></span>
         <span class="hub-logo">{{ with $closing.logo }}<img src="{{ . | relURL }}" alt="" width="160" height="160" loading="lazy" decoding="async">{{ else }}<span>{{ $.cfg.site.title }}</span>{{ end }}</span>
       </button>
       <nav id="{{ $optionsID }}" class="contact-options" aria-label="联系方式" aria-hidden="true" inert data-closing-contact-options data-contact-count="{{ len $contacts }}">
