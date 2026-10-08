@@ -13,6 +13,14 @@
   justify-content: center;
 }
 
+:root[data-theme="light"] .page-screen-blog {
+  background: radial-gradient(circle at 18% 18%, rgba(127, 171, 186, .22) 0%, transparent 34%), radial-gradient(circle at 86% 72%, rgba(215, 169, 85, .12) 0%, transparent 34%), linear-gradient(135deg, #f2f6f7 0%, #f9faf7 48%, #edf2f5 100%);
+  color: #203444;
+}
+
+:root[data-theme="light"] .page-screen-blog .blog-backdrop-word { color: rgba(32, 52, 68, .065); text-shadow: none; }
+:root[data-theme="light"] .page-screen-blog .blog-page::before { opacity: .2; }
+
 .blog-page {
   position: relative;
   width: 100%;

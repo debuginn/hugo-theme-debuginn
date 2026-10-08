@@ -17,3 +17,6 @@
   font-size: 14px;
   line-height: 1.6;
 }
+
+:root[data-theme="dark"] .debuginn-extension-missing { background: #0d131e; color: #d7e2f0; }
+:root[data-theme="dark"] .debuginn-extension-missing p { background: #1b2532; }

@@ -38,6 +38,21 @@ Social links use white monochrome icons by default. Set `preserveIconColor: true
 on a link to keep its image's original colors, for example for a logo with a
 solid background.
 
+## Appearance
+
+The circular control below the right navigation switches between light and dark
+appearance. It follows the system until the visitor makes a choice, saves that
+choice as `debuginn-theme`, and synchronizes it between tabs. The initial
+`html[data-theme]` value is applied before stylesheets load. On touch screens,
+the section dots remain visible and the switch sits above them.
+
+Each section owns its palette. Embedded modules use the resolved root attribute
+without adding their own storage or theme controller. A section can set
+`navAccentDark` to customize its selected navigation icon in dark mode.
+Hugo server previews omit analytics and use a no-referrer policy for image hosts
+that reject localhost referrers; static production builds keep their normal
+image policy and configured analytics.
+
 ## Closing Section
 
 Add a separate final section without replacing the social section:
@@ -63,6 +78,35 @@ Its content is configured independently:
 }
 ```
 
+To replace the standalone contact button with a central logo and up to four
+contact links, add `contactMode: "orbit"` and a nonempty `contacts` array:
+
+```json
+"contactMode": "orbit",
+"contactLabel": "联系我",
+"closedLabel": "移至 Logo",
+"contacts": [
+  { "id": "email", "icon": "email", "label": "邮箱", "href": "mailto:hello@example.com" },
+  { "id": "wechat", "icon": "https://example.com/wechat.svg", "label": "微信", "qrImage": "/closing/wechat-qr.jpg" },
+  { "id": "telegram", "icon": "https://example.com/telegram.svg", "label": "Telegram", "href": "https://example.com/chat" },
+  { "id": "discord", "icon": "discord", "label": "Discord", "href": "https://example.com/community" }
+]
+```
+
+Contact icons use the same format as `social.links`; replace the example URLs
+with your own icons and destinations. QR contacts open a native dialog, and can
+also include an optional `href` below the QR image. The logo opens and closes
+the links with interruptible spring motion when hovered or focused. One to four
+links form a compact fan above the logo; a small transparent bridge keeps hover
+active while moving to a link. Desktop logo clicks do not toggle or scale it;
+touch uses tap to open or close. `touchLabel` defaults to "轻触 Logo". Moving
+outside the fan, clicking blank space or pressing Escape dismisses the links.
+A small question badge nudges once as a hint, with no looping animation.
+Escape closes an open QR dialog first. Closing returns
+keyboard focus, leaving the section collapses the links, and reduced motion
+uses immediate state changes. If orbit mode is absent or contains no usable
+contacts, the original contact button and footer logo remain available.
+
 Item centers (`x`, `y`) and widths are percentages of the section; rotation is
 in degrees. Serve these assets from the site's static directory or an explicit
 Hugo static mount. The optional `photoPool` is an array of image paths: each page
@@ -77,11 +121,14 @@ When no distinct candidate remains, that tile is hidden rather than repeating a
 photo. The image elements retain native lazy loading and decoding. Uniqueness
 applies within the current page; refreshing may show photos from a previous visit.
 Photos and logos share a subtle circular depth-of-field
-effect around the contact button. A nearby mouse or hovering pen brings them
+effect around the contact button or central logo. A nearby mouse or hovering pen brings them
 into focus and gently enlarges them; moving away restores their original state.
 The wordmark has a pointer-following dark iridescent
 sheen, supports touch, and respects reduced motion. Attribution reuses
 `site.footerCredit`, including the version supplied by the site build.
+The section follows the `light` or `dark` value of `html[data-theme]`. Photos and colored brand
+logos retain their colors; set `monochrome: true` on a single-color logo item
+when it should invert for contrast in dark mode.
 
 CSS and JavaScript are loaded only when a closing section is configured, and
 all presentation rules are scoped to that section.

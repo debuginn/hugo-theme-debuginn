@@ -13,8 +13,14 @@
   var hasClosing=sections.some(function(section){return section.hasAttribute('data-closing-section')});
   var currentTone='light';
   var toneGeneration=0;
+  var activeId='';
+  var toneCache=Object.create(null);
+  function darkAppearance(){return document.documentElement.getAttribute('data-theme')==='dark'}
   function applyTone(tone){
-    currentTone=tone==='dark'?'dark':'light';
+    var activeSection=sections.find(function(section){return section.id===activeId});
+    var photoPage=activeId===firstId||!!(activeSection&&activeSection.hasAttribute('data-social-section'));
+    currentTone=photoPage&&darkAppearance()?'light':tone==='dark'?'dark':'light';
+    if(activeSection&&activeSection.classList.contains('page-screen-home'))activeSection.dataset.photoTone=currentTone;
     var useLight=currentTone==='dark';
     if(header){header.classList.toggle('global-header--light',!useLight);header.classList.toggle('global-header--dark',useLight)}
     var mastfoot=footer?footer.querySelector('.mastfoot'):null;
@@ -27,6 +33,7 @@
   function setToneFromImage(src){
     var generation=++toneGeneration;
     if(!src){applyTone('light');return}
+    if(toneCache[src]){applyTone(toneCache[src]);return}
     var img=new Image();
     img.onload=function(){
       if(generation!==toneGeneration)return;
@@ -35,13 +42,15 @@
         canvas.width=img.naturalWidth; canvas.height=img.naturalHeight; ctx.drawImage(img,0,0);
         var data=ctx.getImageData(0,0,canvas.width,canvas.height).data; var lum=0; var px=data.length/4;
         for(var i=0;i<data.length;i+=4){lum+=0.2126*(data[i]||0)+0.7152*(data[i+1]||0)+0.0722*(data[i+2]||0)}
-        applyTone(px>0&&lum/px>150?'dark':'light');
+        toneCache[src]=px>0&&lum/px>150?'dark':'light';
+        applyTone(toneCache[src]);
       }catch(e){applyTone('light')}
     };
     img.onerror=function(){if(generation===toneGeneration)applyTone('light')};
     img.src=src;
   }
   function setActive(id){
+    activeId=id;
     toneGeneration++;
     dots.forEach(function(dot){var active=dot.getAttribute('data-section-dot')===id;dot.classList.toggle('is-active',active);active?dot.setAttribute('aria-current','page'):dot.removeAttribute('aria-current')});
     var idx=sections.findIndex(function(s){return s.id===id}); var next=sections[idx+1];
@@ -57,9 +66,12 @@
     if(footerCopyright) footerCopyright.hidden=!finalFooter;
     if(id===firstId){setToneFromImage(stack.getAttribute('data-home-thumb')||'')}
     if(hasClosing?isSocial:id===lastId){setToneFromImage(stack.getAttribute('data-social-thumb')||'')}
-    if(activeSection&&activeSection.hasAttribute('data-closing-section'))applyTone('dark');
-    if(!photoSection&&down)down.classList.remove('global-page-down--light');
+    if(!photoSection&&activeSection){
+      var permanentDark=activeSection.classList.contains('page-screen-iassets');
+      applyTone(permanentDark||darkAppearance()?'light':'dark');
+    }
   }
+  document.addEventListener('debuginn:themechange',function(){if(activeId)setActive(activeId)});
   if('IntersectionObserver'in window){var observer=new IntersectionObserver(function(entries){var visible=entries.filter(function(e){return e.isIntersecting}).sort(function(a,b){return b.intersectionRatio-a.intersectionRatio})[0]; if(visible)setActive(visible.target.id)}, {root:stack,threshold:[.45,.6,.8]}); sections.forEach(function(s){observer.observe(s)})}
   var home=document.getElementById('home'); var homeBg=''; var homeThumb=''; var homeIdx=0; if(home){try{var backgrounds=JSON.parse(home.getAttribute('data-backgrounds')||'[]'); var thumbs=JSON.parse(home.getAttribute('data-thumbs')||'[]'); if(backgrounds.length){var img=home.querySelector('[data-home-bg]'); homeIdx=Math.floor(Math.random()*backgrounds.length); homeBg=backgrounds[homeIdx]||''; homeThumb=thumbs[homeIdx]||''; stack.setAttribute('data-home-thumb',homeThumb); if(img)img.src=homeBg}}catch(e){}}
   var socialBgSection=stack.querySelector('[data-social-section]'); if(socialBgSection){try{var socialBackgrounds=JSON.parse(socialBgSection.getAttribute('data-backgrounds')||'[]'); var socialThumbs=JSON.parse(socialBgSection.getAttribute('data-thumbs')||'[]'); if(socialBackgrounds.length){var socialImg=socialBgSection.querySelector('[data-social-bg]'); var socialIdx=Math.floor(Math.random()*socialBackgrounds.length); var socialBg=socialBackgrounds[socialIdx]||''; if(socialBackgrounds.length>1){var guard=0; while(socialBg===homeBg&&guard<8){socialIdx=Math.floor(Math.random()*socialBackgrounds.length); socialBg=socialBackgrounds[socialIdx]||''; guard++}} stack.setAttribute('data-social-thumb',socialThumbs[socialIdx]||''); if(socialImg)socialImg.src=socialBg}}catch(e){}}
