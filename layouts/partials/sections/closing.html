@@ -29,7 +29,7 @@
       <div class="contact-bridge" aria-hidden="true"></div>
       <button class="hub-trigger" type="button" aria-label="展开联系方式" aria-expanded="false" aria-controls="{{ $optionsID }}" data-closing-focus>
         <span class="hub-logo">{{ with $closing.logo }}<img src="{{ . | relURL }}" alt="" width="160" height="160" loading="lazy" decoding="async">{{ else }}<span>{{ $.cfg.site.title }}</span>{{ end }}</span>
-        <span class="hub-cue" aria-hidden="true">?</span>
+        <span class="hub-cue" aria-hidden="true"><span class="hub-cue-dot"></span><span class="hub-cue-dot"></span><span class="hub-cue-dot"></span></span>
       </button>
       <nav id="{{ $optionsID }}" class="contact-options" aria-label="联系方式" aria-hidden="true" inert data-closing-contact-options data-contact-count="{{ len $contacts }}">
         {{- range $index, $contact := $contacts -}}
@@ -46,7 +46,7 @@
         {{- if $contact.qrImage }}</button>{{ else }}</a>{{ end -}}
         {{- end -}}
       </nav>
-      <p class="hub-hint" data-closed-hint="{{ $closing.closedLabel | default "移至 Logo" }}" data-touch-hint="{{ $closing.touchLabel | default "轻触 Logo" }}" data-open-hint="{{ $label }}" aria-live="polite">{{ $closing.closedLabel | default "移至 Logo" }}</p>
+      <p class="hub-hint" data-closed-hint="{{ $closing.closedLabel | default "" }}" data-touch-hint="{{ $closing.touchLabel | default "" }}" data-open-hint="{{ $label }}" aria-live="polite">{{ $closing.closedLabel | default "" }}</p>
     </div>
     {{- else -}}
     {{- with $closing.contactHref -}}

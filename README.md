@@ -84,7 +84,6 @@ contact links, add `contactMode: "orbit"` and a nonempty `contacts` array:
 ```json
 "contactMode": "orbit",
 "contactLabel": "联系我",
-"closedLabel": "移至 Logo",
 "contacts": [
   { "id": "email", "icon": "email", "label": "邮箱", "href": "mailto:hello@example.com" },
   { "id": "wechat", "icon": "https://example.com/wechat.svg", "label": "微信", "qrImage": "/closing/wechat-qr.jpg" },
@@ -99,9 +98,12 @@ also include an optional `href` below the QR image. The logo opens and closes
 the links with interruptible spring motion when hovered or focused. One to four
 links form a compact fan above the logo; a small transparent bridge keeps hover
 active while moving to a link. Desktop logo clicks do not toggle or scale it;
-touch uses tap to open or close. `touchLabel` defaults to "轻触 Logo". Moving
+touch uses tap to open or close. The closed state has no caption by default;
+optional `closedLabel` and `touchLabel` values can supply one. Moving
 outside the fan, clicking blank space or pressing Escape dismisses the links.
-A small question badge nudges once as a hint, with no looping animation.
+The logo artwork is clipped to a circle. A small three-dot thought bubble above
+it animates while this section is visible and the fan is closed. Opening the fan
+hides and pauses the dots; reduced motion keeps them static.
 Escape closes an open QR dialog first. Closing returns
 keyboard focus, leaving the section collapses the links, and reduced motion
 uses immediate state changes. If orbit mode is absent or contains no usable

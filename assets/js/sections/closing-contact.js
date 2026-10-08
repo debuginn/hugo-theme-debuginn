@@ -58,8 +58,8 @@
           opacity: axis(0)
         };
       });
-      var hoverHint = hint && (hint.getAttribute('data-closed-hint') || hint.textContent.trim()) || '移至 Logo';
-      var touchHint = hint && hint.getAttribute('data-touch-hint') || '轻触 Logo';
+      var hoverHint = hint && hint.getAttribute('data-closed-hint') || '';
+      var touchHint = hint && hint.getAttribute('data-touch-hint') || hoverHint;
       var openHint = hint && hint.getAttribute('data-open-hint') || '联系我';
       var hintOpacity = axis(1);
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -76,12 +76,6 @@
 
       function closedHint() {
         return lastPointerType === 'touch' || (!hoverInput.matches && lastPointerType !== 'mouse' && lastPointerType !== 'pen') ? touchHint : hoverHint;
-      }
-
-      function showCue() {
-        if (hub.dataset.contactCueShown === 'true') return;
-        hub.dataset.contactCueShown = 'true';
-        hub.classList.add('has-contact-cue');
       }
 
       function readOffsets() {
@@ -312,7 +306,8 @@
         new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             sectionVisible = entry.isIntersecting && entry.intersectionRatio >= 0.2;
-            if (sectionVisible) { showCue(); return; }
+            hub.classList.toggle('is-contact-visible', sectionVisible);
+            if (sectionVisible) return;
             setExpanded(false, false);
             dialogs.forEach(function (dialog) {
               if (dialog.hasAttribute('open') && typeof dialog.close === 'function') dialog.close();
@@ -321,7 +316,7 @@
             snap();
           });
         }, { root: stack || null, threshold: [0, 0.2, 0.5] }).observe(section);
-      } else showCue();
+      } else hub.classList.add('is-contact-visible');
 
       function resize() {
         readOffsets();
