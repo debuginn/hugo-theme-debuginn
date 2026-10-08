@@ -7,21 +7,10 @@
   --rail-tooltip: #fff;
   --rail-tooltip-ink: #12231a;
   --rail-tooltip-edge: #d7e3d8;
-  --rail-brand-surface: rgba(255, 255, 255, .95);
-  --rail-brand-edge: rgba(18, 35, 26, .12);
   background: var(--rail-surface);
   box-shadow: inset 0 1px 0 var(--rail-highlight), inset 0 0 0 1px var(--rail-edge), 0 10px 28px var(--rail-shadow);
 }
 .section-rail-link { color: var(--rail-ink); }
-.section-rail-icon:has(.section-rail-brand) { background: var(--rail-brand-surface); border-color: var(--rail-brand-edge); }
-.section-rail-link:hover .section-rail-icon:has(.section-rail-brand) {
-  background: color-mix(in srgb, var(--section-accent) 8%, #fff);
-  border-color: color-mix(in srgb, var(--section-accent) 35%, #d7e0e3);
-}
-.section-rail-link.is-active .section-rail-icon:has(.section-rail-brand) {
-  background: color-mix(in srgb, var(--section-accent) 16%, #fff);
-  border-color: var(--section-accent);
-}
 .section-rail-tooltip { background: var(--rail-tooltip); color: var(--rail-tooltip-ink); border-color: var(--rail-tooltip-edge); }
 .section-rail-divider { width: 22px; height: 1px; flex: none; margin: 6px auto; background: color-mix(in srgb, var(--rail-ink) 18%, transparent); }
 .appearance-toggle { --section-accent: #485366; --section-accent-dark: #b4c4db; background: transparent; cursor: pointer; font: inherit; appearance: none; -webkit-appearance: none; }
@@ -38,8 +27,6 @@
   --rail-tooltip: #202631;
   --rail-tooltip-ink: #e8edf4;
   --rail-tooltip-edge: #3b4554;
-  --rail-brand-surface: #f1f4f8;
-  --rail-brand-edge: rgba(255, 255, 255, .2);
 }
 :root[data-theme="dark"] .section-rail::before { opacity: .15; }
 :root[data-theme="dark"] .section-rail-link:hover { color: var(--section-accent-dark, #a4bdff); }
@@ -54,14 +41,6 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 5px 15px color-mix(in srgb, var(--section-accent-dark, var(--section-accent)) 22%, transparent);
 }
 :root[data-theme="dark"] .section-rail-link:focus-visible .section-rail-icon { outline-color: var(--section-accent-dark, #a4bdff); }
-:root[data-theme="dark"] .section-rail-link:hover .section-rail-icon:has(.section-rail-brand) {
-  background: color-mix(in srgb, var(--section-accent-dark, #a4bdff) 8%, #f1f4f8);
-  border-color: color-mix(in srgb, var(--section-accent-dark, #a4bdff) 35%, #d7e0e3);
-}
-:root[data-theme="dark"] .section-rail-link.is-active .section-rail-icon:has(.section-rail-brand) {
-  background: color-mix(in srgb, var(--section-accent-dark, #a4bdff) 16%, #f1f4f8);
-  border-color: var(--section-accent-dark, #a4bdff);
-}
 @media (max-width: 768px), (max-width: 1024px) and (hover: none) and (pointer: coarse) {
   .section-rail {
     display: flex;

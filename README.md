@@ -49,9 +49,6 @@ the section dots remain visible and the switch sits above them.
 Each section owns its palette. Embedded modules use the resolved root attribute
 without adding their own storage or theme controller. A section can set
 `navAccentDark` to customize its selected navigation icon in dark mode.
-`navIcon` accepts an existing icon name or a local/HTTP(S) image URL. Brand images
-keep their original colors in a contrasting circular surface, including the
-selected state; the section accent colors its border and shadow.
 Hugo server previews omit analytics and use a no-referrer policy for image hosts
 that reject localhost referrers; static production builds keep their normal
 image policy and configured analytics.

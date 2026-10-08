@@ -1,7 +1,5 @@
 {{- $icon := . -}}
-{{- if or (hasPrefix $icon "/") (hasPrefix $icon "https://") (hasPrefix $icon "http://") -}}
-<img class="section-rail-brand" src="{{ $icon | relURL }}" alt="" width="22" height="22" decoding="async">
-{{- else if eq $icon "home" -}}
+{{- if eq $icon "home" -}}
 <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5M5 9v11h14V9M9 20v-6h6v6"/></svg>
 {{- else if or (eq $icon "product") (eq $icon "iassets") -}}
 <svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10 5.5h4M11 18.5h2"/></svg>
