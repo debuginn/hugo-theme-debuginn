@@ -1,10 +1,10 @@
 .page-screen-social[data-social-ending] {
   --social-ending-surface: #faf9f6;
   --social-ending-ink: #08090b;
-  --social-ending-credit: #435669;
-  --social-ending-link: #3e596e;
-  --social-ending-hover: #132e44;
-  --social-ending-focus: #31718f;
+  --social-ending-credit: rgba(16, 25, 18, .88);
+  --social-ending-link: var(--social-ending-credit);
+  --social-ending-hover: rgba(16, 25, 18, 1);
+  --social-ending-focus: rgba(16, 25, 18, .95);
   --social-wordmark-font: 17.4vw;
   --social-credit-max: 13px;
   isolation: isolate;
