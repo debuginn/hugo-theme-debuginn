@@ -1,0 +1,3 @@
+{{- $social := .social | default dict -}}
+{{- $footer := $social.footer | default dict -}}
+{{- return ($footer.enabled | default false) -}}

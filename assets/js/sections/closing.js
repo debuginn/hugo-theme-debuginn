@@ -112,7 +112,6 @@
     section.dataset.closingInitialized = 'true';
 
     var page = section.querySelector('.closing-page');
-    var focus = section.querySelector('[data-closing-focus]');
     var items = Array.from(section.querySelectorAll('[data-closing-item]'));
     var wordmark = section.querySelector('[data-closing-wordmark]');
     var base = wordmark && wordmark.querySelector('.closing-wordmark-base');
@@ -147,23 +146,11 @@
         }
       }
 
-      if (!focus) return;
-      var focusBounds = focus.getBoundingClientRect();
-      var focusX = focusBounds.left + focusBounds.width / 2;
-      var focusY = focusBounds.top + focusBounds.height / 2;
-
       itemMetrics = items.filter(function (item) {
         return !item.hidden && item.offsetWidth > 0 && item.offsetHeight > 0;
       }).map(function (item) {
         var itemBounds = item.getBoundingClientRect();
-        var dx = itemBounds.left + itemBounds.width / 2 - focusX;
-        var dy = itemBounds.top + itemBounds.height / 2 - focusY;
-        var distance = Math.hypot(dx, dy) / Math.hypot(bounds.width, bounds.height);
-        // Photos and logos share one focal plane centred on the contact button.
-        var depth = clamp((distance - 0.055) / 0.4, 0, 1);
-        var blur = Math.pow(depth, 1.15) * 0.8;
         var rotation = parseFloat(window.getComputedStyle(item).getPropertyValue('--closing-rotation')) || 0;
-        item.style.setProperty('--closing-blur', blur.toFixed(2) + 'px');
         item.style.setProperty('--closing-lens-scale', '1');
         return {
           item: item,
@@ -172,8 +159,7 @@
           width: item.offsetWidth,
           height: item.offsetHeight,
           cosine: Math.cos(rotation * Math.PI / 180),
-          sine: Math.sin(rotation * Math.PI / 180),
-          blur: blur
+          sine: Math.sin(rotation * Math.PI / 180)
         };
       });
       if (lensPointer) requestLens();
@@ -187,7 +173,6 @@
     if ('ResizeObserver' in window) {
       var observer = new ResizeObserver(requestMeasure);
       observer.observe(page);
-      if (focus) observer.observe(focus);
     } else {
       window.addEventListener('resize', requestMeasure, { passive: true });
     }
@@ -224,7 +209,6 @@
         var distance = clamp((edgeDistance - innerRadius) / (outerRadius - innerRadius), 0, 1);
         var strength = 1 - distance * distance * (3 - 2 * distance);
         var scale = reducedMotion && reducedMotion.matches ? 1 : 1 + strength * 0.1;
-        metric.item.style.setProperty('--closing-blur', (metric.blur * (1 - strength)).toFixed(2) + 'px');
         metric.item.style.setProperty('--closing-lens-scale', scale.toFixed(4));
       });
     }
@@ -238,7 +222,6 @@
       if (lensFrame) window.cancelAnimationFrame(lensFrame);
       lensFrame = 0;
       itemMetrics.forEach(function (metric) {
-        metric.item.style.setProperty('--closing-blur', metric.blur.toFixed(2) + 'px');
         metric.item.style.setProperty('--closing-lens-scale', '1');
       });
     }

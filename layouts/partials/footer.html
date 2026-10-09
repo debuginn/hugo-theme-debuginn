@@ -1,7 +1,9 @@
 <div class="global-footer" data-site-footer>
   <div class="mastfoot mastfoot--light"><div class="inner">
     {{ with .cfg.home.photoCredit }}<p class="photo-credit" data-footer-photo>{{ .text }} <a href="{{ .linkHref }}">{{ .linkLabel }}</a>{{ .suffix }}</p>{{ end }}
-    {{- if not (where .cfg.sections "type" "closing") -}}
+    {{- $last := index .cfg.sections (sub (len .cfg.sections) 1) -}}
+    {{- $socialEnding := and (eq $last.type "social") (partial "functions/social-footer-enabled.html" .cfg) -}}
+    {{- if not (or (where .cfg.sections "type" "closing") $socialEnding) -}}
     <p class="copyright-text" data-footer-copyright hidden>
       {{- with .cfg.site.footerCredit -}}
         {{- $copyrightHref := or .copyrightHref $.cfg.site.url -}}
