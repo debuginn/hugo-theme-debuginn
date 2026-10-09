@@ -24,7 +24,7 @@
       var currentSize = parseFloat(getComputedStyle(wordmark).fontSize);
       if (textWidth > 0 && targetWidth > 0 && currentSize > 0) {
         var fullWidthSize = currentSize * targetWidth / textWidth;
-        var fittedSize = Math.min(fullWidthSize * 1.24, bounds.height * .32);
+        var fittedSize = Math.min(fullWidthSize * 1.40, bounds.height * .36);
         wordmark.style.fontSize = fittedSize.toFixed(2) + 'px';
         wordmark.style.setProperty('--social-wordmark-stretch', (fullWidthSize / fittedSize).toFixed(4));
         section.style.setProperty('--social-wordmark-font', fittedSize.toFixed(2) + 'px');

@@ -164,6 +164,7 @@
 
 @media (max-height: 480px) {
   .page-screen-social[data-social-ending] .social-page { padding-top: 72px; padding-bottom: 90px; }
+  .page-screen-social[data-social-ending] .social-media { transform: translateY(calc(-4vh - 12px)); transform: translateY(calc(-4dvh - 12px)); }
   .page-screen-social .social-signature { bottom: calc(var(--social-wordmark-font) * .72 + 14px); }
 }
 
