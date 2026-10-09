@@ -11,6 +11,18 @@
   var firstId=stack.getAttribute('data-first-section');
   var lastId=stack.getAttribute('data-last-section');
   var hasClosing=sections.some(function(section){return section.hasAttribute('data-closing-section')});
+  var socialEnding=stack.querySelector('[data-social-ending]');
+  var hasSocialEnding=!!(socialEnding&&socialEnding.id===lastId);
+  function resolveClosingLink(){
+    if(hasClosing||!hasSocialEnding||location.hash!=='#closing')return;
+    history.replaceState(history.state,'','#'+socialEnding.id);
+    var behavior=stack.style.scrollBehavior;
+    stack.style.scrollBehavior='auto';
+    socialEnding.scrollIntoView({block:'start',behavior:'auto'});
+    stack.style.scrollBehavior=behavior;
+  }
+  resolveClosingLink();
+  window.addEventListener('hashchange',resolveClosingLink);
   var currentTone='light';
   var toneGeneration=0;
   var activeId='';
@@ -58,7 +70,7 @@
     var activeSection=sections[idx];
     var isSocial=!!(activeSection&&activeSection.hasAttribute('data-social-section'));
     var photoSection=id===firstId||(hasClosing?isSocial:id===lastId);
-    var finalFooter=!hasClosing&&id===lastId;
+    var finalFooter=!hasClosing&&!hasSocialEnding&&id===lastId;
     var footerSection=id===firstId||finalFooter;
     if(header) header.hidden=!photoSection;
     if(footer) footer.hidden=!footerSection;

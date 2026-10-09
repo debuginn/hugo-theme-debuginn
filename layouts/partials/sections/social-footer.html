@@ -1,0 +1,9 @@
+{{- $credit := .cfg.site.footerCredit | default dict -}}
+{{- $wordmark := .cfg.social.footer.wordmark | default "DEBUGINN" -}}
+<footer class="social-signature" aria-label="网站版权">
+  <p class="social-credit" data-social-credit>{{- with $credit -}}{{ .builderPrefix | default "Built with " }}<a href="{{ .builderHref | default "https://gohugo.io/" }}" target="_blank" rel="noopener noreferrer">{{ .builderLabel | default "Hugo" }}</a>{{ .themePrefix | default ", theme " }}<a href="{{ .themeHref | default "https://github.com/debuginn/hugo-theme-debuginn" }}" target="_blank" rel="noopener noreferrer">{{ .themeLabel | default "Debuginn" }}</a>{{ .version }}<span aria-hidden="true"> · </span>{{- end -}}© {{ .cfg.site.copyrightStartYear }}-{{ now.Format "2006" }} <a href="{{ $credit.copyrightHref | default .cfg.site.url | default "/" }}">{{ $credit.copyrightLabel | default .cfg.site.title }}</a></p>
+</footer>
+<div class="social-wordmark" data-social-wordmark role="img" aria-label="{{ $wordmark }}">
+  <span class="social-wordmark-base" aria-hidden="true">{{ $wordmark }}</span>
+  <span class="social-wordmark-sheen" aria-hidden="true">{{ $wordmark }}</span>
+</div>

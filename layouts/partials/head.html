@@ -50,6 +50,12 @@
     {{- $loadedSectionStyles.Set $stylePath true -}}
   {{- end -}}
 {{- end -}}
+{{- if and (partial "functions/social-footer-enabled.html" $cfg) (where $cfg.sections "type" "social") -}}
+{{- with resources.Get "css/sections/social-ending.css" -}}
+{{- $endingCSS := . | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $endingCSS.RelPermalink }}" integrity="{{ $endingCSS.Data.Integrity }}" crossorigin="anonymous">
+{{- end -}}
+{{- end -}}
 {{ range $name, $extension := $cfg.extensions }}
   {{- if and $extension.enabled $extension.styles -}}
     {{- range $extension.styles -}}

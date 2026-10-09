@@ -54,6 +54,35 @@ Hugo server previews omit analytics and use a no-referrer policy for image hosts
 that reject localhost referrers; static production builds keep their normal
 image policy and configured analytics.
 
+## Social Footer
+
+To combine the social page and final signature, make the social section the last
+entry in `sections` and enable its footer:
+
+```json
+"social": {
+  "footer": { "enabled": true, "wordmark": "DEBUGINN" },
+  "links": [
+    { "label": "YouTube", "icon": "youtube", "href": "https://www.youtube.com/@debuginn", "followers": 6 }
+  ]
+}
+```
+
+Keep the site's existing `social.links` and append additional links as needed.
+The original circular buttons, hover counts, QR popovers, and counter animation
+are reused. Footer layout and colors are isolated in `social-ending.css`; the
+existing button stylesheet is unchanged. The background still comes from the
+photography pool, with a light or dark fade beneath the signature.
+
+The single-line credit uses `site.footerCredit`, including the real release
+version provided by the site build, and the current copyright year. Its text
+fits the available width on phones. The large wordmark retains pointer and
+touch-controlled iridescent color, resizes with the viewport, and respects
+reduced motion. No contact entry or decorative logos are part of this footer.
+When no separate Closing section is configured, old `#closing` bookmarks open
+the final social section. Without `social.footer.enabled`, the original social
+layout and global footer remain available.
+
 ## Closing Section
 
 Add a separate final section without replacing the social section:
