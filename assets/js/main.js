@@ -79,7 +79,7 @@
     if(id===firstId){setToneFromImage(stack.getAttribute('data-home-thumb')||'')}
     if(hasClosing?isSocial:id===lastId){setToneFromImage(stack.getAttribute('data-social-thumb')||'')}
     if(!photoSection&&activeSection){
-      var permanentDark=activeSection.classList.contains('page-screen-iassets');
+      var permanentDark=activeSection.getAttribute('data-section-appearance')==='dark'||activeSection.classList.contains('page-screen-iassets');
       applyTone(permanentDark||darkAppearance()?'light':'dark');
     }
   }
