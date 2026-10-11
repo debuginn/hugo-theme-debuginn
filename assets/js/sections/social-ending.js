@@ -7,8 +7,9 @@
     var page = section.querySelector('.social-page');
     var wordmark = section.querySelector('[data-social-wordmark]');
     var base = wordmark && wordmark.querySelector('.social-wordmark-base');
+    var sheen = wordmark && wordmark.querySelector('.social-wordmark-sheen');
     var credit = section.querySelector('[data-social-credit]');
-    if (!page || !wordmark || !base || section.dataset.socialEndingInitialized === 'true') return;
+    if (!page || !wordmark || !base || !sheen || section.dataset.socialEndingInitialized === 'true') return;
     section.dataset.socialEndingInitialized = 'true';
     var measureFrame = 0;
     var pointerFrame = 0;
@@ -53,10 +54,10 @@
       if (!bounds.width || !bounds.height) return;
       var x = clamp((pointer.x - bounds.left) / bounds.width, 0, 1) * 100;
       var y = clamp((pointer.y - bounds.top) / bounds.height, 0, 1) * 100;
-      wordmark.style.setProperty('--social-light-x', x.toFixed(2) + '%');
-      wordmark.style.setProperty('--social-light-y', y.toFixed(2) + '%');
-      wordmark.style.setProperty('--social-ink-x', (20 + x * .6).toFixed(2) + '%');
-      wordmark.style.setProperty('--social-sheen-opacity', '1');
+      sheen.style.setProperty('--social-light-x', x.toFixed(2) + '%');
+      sheen.style.setProperty('--social-light-y', y.toFixed(2) + '%');
+      sheen.style.setProperty('--social-ink-x', (20 + x * .6).toFixed(2) + '%');
+      sheen.style.setProperty('--social-sheen-opacity', '1');
     }
 
     function updatePointer(event) {
@@ -68,7 +69,7 @@
       pointer = null;
       if (pointerFrame) cancelAnimationFrame(pointerFrame);
       pointerFrame = 0;
-      wordmark.style.setProperty('--social-sheen-opacity', '0');
+      sheen.style.setProperty('--social-sheen-opacity', '0');
     }
 
     function releasePointer(event) {
