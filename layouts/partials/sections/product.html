@@ -4,7 +4,7 @@
 {{- $columns := $product.mosaicColumns | default 10 -}}
 {{- $durations := $product.mosaicDurations | default (slice "600s" "660s" "630s" "690s") -}}
 {{- $delays := $product.mosaicDelays | default (slice "0s" "-3s" "-8s" "-6s") -}}
-<section class="page-screen page-screen-iassets" id="{{ .section.id }}" data-section="{{ .section.id }}">
+<section class="page-screen page-screen-iassets" id="{{ .section.id }}" data-section="{{ .section.id }}" data-section-appearance="dark">
   <div class="iassets-page">
     <div class="iassets-card-wrap">
       <div class="cta-box">

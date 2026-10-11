@@ -2,13 +2,6 @@
   background: radial-gradient(circle at 50% 8%, #2d3f57 0%, var(--home-bg) 58%, #0b1220 100%);
 }
 
-:root[data-theme="dark"] .page-screen-home .page-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(6, 11, 18, .56);
-}
-
 .page-screen-home[data-photo-tone="dark"] #hitokoto { color: #17222f; }
 .page-screen-home[data-photo-tone="light"] #hitokoto { color: #f8fbff; }
 

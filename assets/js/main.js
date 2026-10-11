@@ -30,8 +30,8 @@
   function darkAppearance(){return document.documentElement.getAttribute('data-theme')==='dark'}
   function applyTone(tone){
     var activeSection=sections.find(function(section){return section.id===activeId});
-    var photoPage=activeId===firstId||!!(activeSection&&activeSection.hasAttribute('data-social-section'));
-    currentTone=photoPage&&darkAppearance()?'light':tone==='dark'?'dark':'light';
+    var socialPhoto=!!(activeSection&&activeSection.hasAttribute('data-social-section'));
+    currentTone=socialPhoto&&darkAppearance()?'light':tone==='dark'?'dark':'light';
     if(activeSection&&activeSection.classList.contains('page-screen-home'))activeSection.dataset.photoTone=currentTone;
     var useLight=currentTone==='dark';
     if(header){header.classList.toggle('global-header--light',!useLight);header.classList.toggle('global-header--dark',useLight)}
