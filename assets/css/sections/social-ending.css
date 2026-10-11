@@ -176,8 +176,8 @@
   .page-screen-social .social-signature { bottom: calc(var(--social-wordmark-font) * .66 + 11px); }
 }
 
-@media (min-width: 769px) and (max-width: 900px) {
-  .page-screen-social[data-social-ending] .social-links { flex-wrap: wrap; max-width: 416px; }
+@media (min-width: 769px) and (max-width: 1060px) {
+  .page-screen-social[data-social-ending] .social-links { flex-wrap: wrap; max-width: 488px; }
 }
 
 @media (max-width: 350px) {
@@ -192,6 +192,10 @@
 
 @media (max-width: 768px) and (max-height: 400px) {
   .page-screen-social[data-social-ending] .social-total { margin-bottom: 0; }
+}
+
+@media (max-width: 768px) and (max-height: 480px) {
+  .page-screen-social[data-social-ending] .social-links { max-width: 396px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
