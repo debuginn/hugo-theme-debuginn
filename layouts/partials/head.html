@@ -51,7 +51,6 @@
   {{- end -}}
 {{- end -}}
 {{- if and (partial "functions/social-footer-enabled.html" $cfg) (where $cfg.sections "type" "social") -}}
-<link rel="preload" href="{{ "fonts/barlow-semi-condensed-latin-700-bc8aadf9.woff2" | relURL }}" as="font" type="font/woff2" crossorigin="anonymous">
 {{- with resources.Get "css/sections/social-ending.css" -}}
 {{- $endingCSS := . | minify | fingerprint -}}
 <link rel="stylesheet" href="{{ $endingCSS.RelPermalink }}" integrity="{{ $endingCSS.Data.Integrity }}" crossorigin="anonymous">

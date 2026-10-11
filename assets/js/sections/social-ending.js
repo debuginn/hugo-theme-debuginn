@@ -8,8 +8,6 @@
     var wordmark = section.querySelector('[data-social-wordmark]');
     var base = wordmark && wordmark.querySelector('.social-wordmark-base');
     var credit = section.querySelector('[data-social-credit]');
-    var signature = section.querySelector('.social-signature');
-    var metricsContext = document.createElement('canvas').getContext('2d');
     if (!page || !wordmark || !base || section.dataset.socialEndingInitialized === 'true') return;
     section.dataset.socialEndingInitialized = 'true';
     var measureFrame = 0;
@@ -26,24 +24,10 @@
       var currentSize = parseFloat(getComputedStyle(wordmark).fontSize);
       if (textWidth > 0 && targetWidth > 0 && currentSize > 0) {
         var fullWidthSize = currentSize * targetWidth / textWidth;
-        var fittedSize = Math.min(fullWidthSize, bounds.height * .46);
+        var fittedSize = Math.min(fullWidthSize * 1.40, bounds.height * .36);
         wordmark.style.fontSize = fittedSize.toFixed(2) + 'px';
+        wordmark.style.setProperty('--social-wordmark-stretch', (fullWidthSize / fittedSize).toFixed(4));
         section.style.setProperty('--social-wordmark-font', fittedSize.toFixed(2) + 'px');
-        if (signature) {
-          var gap = clamp(fittedSize * .04, 9, 18);
-          var creditBottom = fittedSize * .72 + gap;
-          if (metricsContext) {
-            var style = getComputedStyle(wordmark);
-            metricsContext.font = style.fontWeight + ' ' + style.fontSize + ' ' + style.fontFamily;
-            var metrics = metricsContext.measureText(base.textContent);
-            if (Number.isFinite(metrics.fontBoundingBoxAscent) && Number.isFinite(metrics.fontBoundingBoxDescent) && Number.isFinite(metrics.actualBoundingBoxAscent)) {
-              var lineHeight = parseFloat(style.lineHeight);
-              var baseline = base.getBoundingClientRect().top + (lineHeight - metrics.fontBoundingBoxAscent - metrics.fontBoundingBoxDescent) / 2 + metrics.fontBoundingBoxAscent;
-              creditBottom = bounds.bottom - (baseline - metrics.actualBoundingBoxAscent) + gap;
-            }
-          }
-          signature.style.bottom = creditBottom.toFixed(2) + 'px';
-        }
       }
       if (credit) {
         var maxSize = parseFloat(getComputedStyle(section).getPropertyValue('--social-credit-max')) || 13;
@@ -65,7 +49,7 @@
     function renderPointer() {
       pointerFrame = 0;
       if (!pointer) return;
-      var bounds = base.getBoundingClientRect();
+      var bounds = wordmark.getBoundingClientRect();
       if (!bounds.width || !bounds.height) return;
       var x = clamp((pointer.x - bounds.left) / bounds.width, 0, 1) * 100;
       var y = clamp((pointer.y - bounds.top) / bounds.height, 0, 1) * 100;

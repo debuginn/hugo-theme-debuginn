@@ -79,17 +79,15 @@ Keep the site's existing `social.links` and append additional links as needed.
 The original circular buttons, hover counts, QR popovers, and counter animation
 are reused. Footer layout and colors are isolated in `social-ending.css`; the
 existing button stylesheet is unchanged. The background still comes from the
-photography pool, with a light or dark fade beneath the signature.
+photography pool; only dark appearance adds a fade beneath the signature.
 
 The single-line credit uses `site.footerCredit`, including the real release
 version provided by the site build, and the current copyright year. Its text
 fits the available width on phones. The large wordmark retains pointer and
 touch-controlled iridescent color, resizes with the viewport, and respects
-reduced motion. No contact entry or decorative logos are part of this footer.
-Its Barlow Semi Condensed 700 wordmark uses a bundled Latin WOFF2 font and fits
-at its natural proportions. The credit sits just above the visible letter tops.
-The font comes from [Google Fonts](https://github.com/google/fonts/tree/main/ofl/barlowsemicondensed)
-under the SIL Open Font License; its notice is included in `static/fonts/OFL-Barlow.txt`.
+reduced motion. Its ink and iridescent sheen share a translucent layer, letting
+the photograph show through in both appearances. No contact entry or decorative
+logos are part of this footer.
 When no separate Closing section is configured, old `#closing` bookmarks open
 the final social section. Without `social.footer.enabled`, the original social
 layout and global footer remain available.
