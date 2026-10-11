@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Debuginn Wordmark";
+  src: url("../../fonts/barlow-semi-condensed-latin-700-bc8aadf9.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 .page-screen-social[data-social-ending] {
   --social-ending-surface: #faf9f6;
   --social-ending-ink: #08090b;
@@ -90,19 +98,19 @@
   --social-light-y: 50%;
   --social-ink-x: 50%;
   --social-sheen-opacity: 0;
-  --social-wordmark-stretch: 1;
   position: absolute;
   right: 4%;
-  bottom: -.14em;
+  bottom: -.015em;
   left: 4%;
   z-index: 1;
   margin: 0;
   color: var(--social-ending-ink);
-  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Debuginn Wordmark", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   font-size: 17.4vw;
-  font-weight: 900;
-  line-height: .86;
-  letter-spacing: -.065em;
+  font-weight: 700;
+  font-synthesis: none;
+  line-height: .84;
+  letter-spacing: -.025em;
   text-align: center;
   white-space: nowrap;
   user-select: none;
@@ -122,7 +130,7 @@
   left: 50%;
   display: block;
   width: max-content;
-  transform: translateX(-50%) scaleX(var(--social-wordmark-stretch));
+  transform: translateX(-50%);
 }
 
 .page-screen-social .social-wordmark-sheen {
@@ -139,7 +147,7 @@
   -webkit-mask-image: radial-gradient(ellipse 28% 140% at var(--social-light-x) var(--social-light-y), #000 0%, #000 36%, rgba(0, 0, 0, .58) 70%, transparent 100%);
   mask-image: radial-gradient(ellipse 28% 140% at var(--social-light-x) var(--social-light-y), #000 0%, #000 36%, rgba(0, 0, 0, .58) 70%, transparent 100%);
   opacity: var(--social-sheen-opacity);
-  transform: translateX(-50%) scaleX(var(--social-wordmark-stretch));
+  transform: translateX(-50%);
   transition: opacity 300ms ease-out;
   pointer-events: none;
 }

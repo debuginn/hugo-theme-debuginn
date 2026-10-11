@@ -86,6 +86,10 @@ version provided by the site build, and the current copyright year. Its text
 fits the available width on phones. The large wordmark retains pointer and
 touch-controlled iridescent color, resizes with the viewport, and respects
 reduced motion. No contact entry or decorative logos are part of this footer.
+Its Barlow Semi Condensed 700 wordmark uses a bundled Latin WOFF2 font and fits
+at its natural proportions. The credit sits just above the visible letter tops.
+The font comes from [Google Fonts](https://github.com/google/fonts/tree/main/ofl/barlowsemicondensed)
+under the SIL Open Font License; its notice is included in `static/fonts/OFL-Barlow.txt`.
 When no separate Closing section is configured, old `#closing` bookmarks open
 the final social section. Without `social.footer.enabled`, the original social
 layout and global footer remain available.
