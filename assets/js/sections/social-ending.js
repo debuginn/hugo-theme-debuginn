@@ -65,7 +65,7 @@
     function renderPointer() {
       pointerFrame = 0;
       if (!pointer) return;
-      var bounds = wordmark.getBoundingClientRect();
+      var bounds = base.getBoundingClientRect();
       if (!bounds.width || !bounds.height) return;
       var x = clamp((pointer.x - bounds.left) / bounds.width, 0, 1) * 100;
       var y = clamp((pointer.y - bounds.top) / bounds.height, 0, 1) * 100;
