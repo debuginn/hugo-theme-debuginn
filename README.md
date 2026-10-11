@@ -52,6 +52,9 @@ without adding their own storage or theme controller. A section can set
 `navAccentDark` to customize its selected navigation icon in dark mode.
 Home keeps the original photograph treatment and derives text contrast from
 image brightness. iAssets and Blog keep their dark palettes in either mode.
+Home selects its random photograph while the page is parsed, using the matching
+thumbnail until the full image loads. The deferred script reuses that selection;
+without JavaScript, the first configured photograph remains available.
 Set `navIcon` to `plural` or `sparkles` for three star points in the section
 navigation. `ingot` remains available for a yuanbao outline.
 Hugo server previews omit analytics and use a no-referrer policy for image hosts
