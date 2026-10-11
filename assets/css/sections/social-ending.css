@@ -19,7 +19,6 @@
   --social-ending-focus: #9ed1f3;
 }
 
-.page-screen-social[data-social-ending] .page-bg::after,
 :root[data-theme="dark"] .page-screen-social[data-social-ending] .page-bg::after {
   content: "";
   position: absolute;
