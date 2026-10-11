@@ -4,6 +4,8 @@
   var root = document.documentElement;
   var storageKey = 'debuginn-theme';
   var scheme = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  var modes = ['system', 'light', 'dark'];
+  var labels = { system: '跟随设备', light: '明亮模式', dark: '暗黑模式' };
   var preference = 'system';
   var resolved = 'light';
 
@@ -13,18 +15,22 @@
 
   try { preference = savedPreference(window.localStorage.getItem(storageKey)); } catch (_) {}
 
+  function nextPreference() {
+    return modes[(modes.indexOf(preference) + 1) % modes.length];
+  }
+
   function apply() {
     resolved = preference === 'system' ? scheme && scheme.matches ? 'dark' : 'light' : preference;
     root.dataset.theme = resolved;
+    root.dataset.themePreference = preference;
     root.style.colorScheme = resolved;
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0d1015' : '#faf9f6');
     document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
-      var label = resolved === 'dark' ? '切换浅色模式' : '切换暗黑模式';
+      var label = '当前' + labels[preference] + '，点击切换为' + labels[nextPreference()];
       button.setAttribute('aria-label', label);
-      button.setAttribute('aria-pressed', String(resolved === 'dark'));
       var caption = button.querySelector('[data-theme-label]');
-      if (caption) caption.textContent = label;
+      if (caption) caption.textContent = labels[preference];
     });
     document.dispatchEvent(new CustomEvent('debuginn:themechange', { detail: { theme: resolved, preference: preference } }));
   }
@@ -35,7 +41,7 @@
   function initializeControls() {
     document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
       button.addEventListener('click', function () {
-        preference = resolved === 'dark' ? 'light' : 'dark';
+        preference = nextPreference();
         try { window.localStorage.setItem(storageKey, preference); } catch (_) {}
         apply();
       });

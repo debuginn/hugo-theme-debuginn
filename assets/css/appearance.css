@@ -15,9 +15,12 @@
 .section-rail-divider { width: 22px; height: 1px; flex: none; margin: 6px auto; background: color-mix(in srgb, var(--rail-ink) 18%, transparent); }
 .appearance-toggle { --section-accent: #485366; --section-accent-dark: #b4c4db; background: transparent; cursor: pointer; font: inherit; appearance: none; -webkit-appearance: none; }
 .appearance-toggle .section-rail-icon { background: color-mix(in srgb, var(--rail-ink) 5%, transparent); }
-.appearance-toggle [data-theme-icon="sun"] { display: none; }
-:root[data-theme="dark"] .appearance-toggle [data-theme-icon="sun"] { display: block; }
-:root[data-theme="dark"] .appearance-toggle [data-theme-icon="moon"] { display: none; }
+.appearance-toggle [data-theme-icon] { display: none; }
+.appearance-toggle [data-theme-icon="system"] { display: block; }
+:root[data-theme-preference="light"] .appearance-toggle [data-theme-icon="system"],
+:root[data-theme-preference="dark"] .appearance-toggle [data-theme-icon="system"] { display: none; }
+:root[data-theme-preference="light"] .appearance-toggle [data-theme-icon="sun"],
+:root[data-theme-preference="dark"] .appearance-toggle [data-theme-icon="moon"] { display: block; }
 :root[data-theme="dark"] .section-rail {
   --rail-surface: rgba(27, 32, 42, .8);
   --rail-ink: #c4cfdb;

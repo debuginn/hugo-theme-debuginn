@@ -40,9 +40,11 @@ solid background.
 
 ## Appearance
 
-The circular control below the right navigation switches between light and dark
-appearance. It follows the system until the visitor makes a choice, saves that
-choice as `debuginn-theme`, and synchronizes it between tabs. The initial
+The circular control below the right navigation cycles through system, light,
+and dark appearance. The monitor, sun, and moon icons show the selected mode.
+System is the default and follows device appearance changes; choosing it again
+returns to automatic appearance. Explicit light and dark choices are retained.
+The choice is saved as `debuginn-theme` and synchronized between tabs. The initial
 `html[data-theme]` value is applied before stylesheets load. On phones and compact
 touch screens, only the section dots are shown; the desktop navigation and
 appearance switch are hidden.
