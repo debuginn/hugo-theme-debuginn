@@ -34,6 +34,7 @@
     currentTone=socialPhoto&&darkAppearance()?'light':tone==='dark'?'dark':'light';
     if(activeSection&&activeSection.classList.contains('page-screen-home'))activeSection.dataset.photoTone=currentTone;
     var useLight=currentTone==='dark';
+    stack.setAttribute('data-heading-tone',useLight?'dark':'light');
     if(header){header.classList.toggle('global-header--light',!useLight);header.classList.toggle('global-header--dark',useLight)}
     var mastfoot=footer?footer.querySelector('.mastfoot'):null;
     if(mastfoot){mastfoot.classList.toggle('mastfoot--light',!useLight);mastfoot.classList.toggle('mastfoot--dark',useLight)}

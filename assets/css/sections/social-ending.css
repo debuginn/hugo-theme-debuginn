@@ -2,10 +2,10 @@
   --social-ending-surface: #faf9f6;
   --social-ending-ink: #08090b;
   --social-wordmark-opacity: .6;
-  --social-ending-credit: rgba(16, 25, 18, .88);
+  --social-ending-credit: var(--photo-heading-color, rgba(255, 255, 255, .92));
   --social-ending-link: var(--social-ending-credit);
-  --social-ending-hover: rgba(16, 25, 18, 1);
-  --social-ending-focus: rgba(16, 25, 18, .95);
+  --social-ending-hover: var(--photo-heading-hover, #fff);
+  --social-ending-focus: var(--photo-heading-focus, rgba(255, 255, 255, .95));
   --social-wordmark-font: 17.4vw;
   --social-credit-max: 13px;
   isolation: isolate;
@@ -15,10 +15,6 @@
   --social-ending-surface: #0c121b;
   --social-ending-ink: #dde6f2;
   --social-wordmark-opacity: .6;
-  --social-ending-credit: #abc0d6;
-  --social-ending-link: #c5d9ec;
-  --social-ending-hover: #eff6fd;
-  --social-ending-focus: #9ed1f3;
 }
 
 :root[data-theme="dark"] .page-screen-social[data-social-ending] .page-bg::after {
