@@ -14,7 +14,7 @@
 :root[data-theme="dark"] .page-screen-social[data-social-ending] {
   --social-ending-surface: #0c121b;
   --social-ending-ink: #dde6f2;
-  --social-wordmark-opacity: .7;
+  --social-wordmark-opacity: .6;
   --social-ending-credit: #abc0d6;
   --social-ending-link: #c5d9ec;
   --social-ending-hover: #eff6fd;
