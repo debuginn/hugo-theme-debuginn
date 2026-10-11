@@ -52,7 +52,8 @@ without adding their own storage or theme controller. A section can set
 `navAccentDark` to customize its selected navigation icon in dark mode.
 Home keeps the original photograph treatment and derives text contrast from
 image brightness. iAssets and Blog keep their dark palettes in either mode.
-Set `navIcon` to `ingot` for a yuanbao outline in the section navigation.
+Set `navIcon` to `plural` or `sparkles` for three star points in the section
+navigation. `ingot` remains available for a yuanbao outline.
 Hugo server previews omit analytics and use a no-referrer policy for image hosts
 that reject localhost referrers; static production builds keep their normal
 image policy and configured analytics.
