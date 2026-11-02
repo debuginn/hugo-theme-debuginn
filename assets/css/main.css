@@ -731,9 +731,7 @@ body {
 
 @media (max-width: 768px) {
   .page-dots,
-  .global-page-down {
-    display: none !important;
-  }
+  .global-page-down { display: none !important; }
 
   .section-rail {
     top: auto;
@@ -741,7 +739,6 @@ body {
     bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     left: 50%;
     z-index: 30;
-    display: flex;
     flex-direction: row;
     align-items: center;
     width: min(23.125rem, calc(100vw - 1.25rem));
@@ -749,229 +746,17 @@ body {
     height: 62px;
     padding: 5px;
     gap: 0;
-    overflow-x: auto;
-    border: 1px solid rgba(255, 255, 255, 0.34);
     border-radius: 31px;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 42%, rgba(8, 12, 18, 0.08) 100%),
-      rgba(16, 20, 28, 0.28);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.62),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-      0 16px 36px rgba(0, 0, 0, 0.28),
-      0 2px 8px rgba(0, 0, 0, 0.16);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    backdrop-filter: blur(28px) saturate(180%);
     transform: translateX(-50%);
-    scrollbar-width: none;
   }
 
-  .section-rail::before {
-    inset: 1px;
-    border-radius: 30px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 46%);
-    opacity: 1;
-  }
-
-  .section-rail::-webkit-scrollbar {
-    display: none;
-  }
-
-  .section-rail-link {
-    width: 48px;
-    height: 50px;
-    flex: 0 0 48px;
-    border-radius: 22px;
-    color: rgba(255, 255, 255, 0.78);
-  }
-
-  .section-rail-link:hover,
-  .section-rail-link.is-active {
-    color: #fff;
-  }
-
-  .section-rail-icon {
-    width: 42px;
-    height: 36px;
-    border: 0;
-    border-radius: 18px;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .section-rail-link:hover .section-rail-icon,
-  .section-rail-link.is-active .section-rail-icon {
-    border-color: transparent;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.14) 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.72),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-      0 6px 14px rgba(0, 0, 0, 0.16);
-    color: #fff;
-  }
-
-  .section-rail:has([data-section-dot="flybay"].is-active),
-  .section-rail:has([data-section-dot="plural"].is-active) {
-    border-color: rgba(255, 255, 255, 0.62);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.18) 48%, rgba(255, 255, 255, 0.08) 100%),
-      rgba(255, 255, 255, 0.22);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.86),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.2),
-      0 14px 32px rgba(28, 48, 36, 0.16),
-      0 2px 8px rgba(28, 48, 36, 0.08);
-  }
-
-  .section-rail:has([data-section-dot="flybay"].is-active) .section-rail-link,
-  .section-rail:has([data-section-dot="plural"].is-active) .section-rail-link {
-    color: rgba(22, 28, 34, 0.62);
-  }
-
-  .section-rail:has([data-section-dot="flybay"].is-active) .section-rail-link.is-active,
-  .section-rail:has([data-section-dot="plural"].is-active) .section-rail-link.is-active,
-  .section-rail:has([data-section-dot="flybay"].is-active) .section-rail-link:hover,
-  .section-rail:has([data-section-dot="plural"].is-active) .section-rail-link:hover {
-    color: #111418;
-  }
-
-  .section-rail:has([data-section-dot="flybay"].is-active) .section-rail-link.is-active .section-rail-icon,
-  .section-rail:has([data-section-dot="plural"].is-active) .section-rail-link.is-active .section-rail-icon,
-  .section-rail:has([data-section-dot="flybay"].is-active) .section-rail-link:hover .section-rail-icon,
-  .section-rail:has([data-section-dot="plural"].is-active) .section-rail-link:hover .section-rail-icon {
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.42) 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      0 6px 14px rgba(28, 48, 36, 0.1);
-    color: #111418;
-  }
-
-  .page-stack:has(.page-screen-plural:has(.plural-embed[data-theme="dark"])) .section-rail:has([data-section-dot="plural"].is-active) {
-    border-color: rgba(255, 255, 255, 0.34);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 42%, rgba(8, 12, 18, 0.08) 100%),
-      rgba(16, 20, 28, 0.28);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.62),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-      0 16px 36px rgba(0, 0, 0, 0.28);
-  }
-
-  .page-stack:has(.page-screen-plural:has(.plural-embed[data-theme="dark"])) .section-rail:has([data-section-dot="plural"].is-active) .section-rail-link,
-  .page-stack:has(.page-screen-plural:has(.plural-embed[data-theme="dark"])) .section-rail:has([data-section-dot="plural"].is-active) .section-rail-link.is-active {
-    color: #fff;
-  }
-
-  .section-rail--liquid {
-    overflow: hidden;
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.62);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow:
-      inset 0 1.5px 0 rgba(255, 255, 255, 0.82),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.16),
-      0 18px 40px rgba(0, 0, 0, 0.28);
-  }
-
-  .section-rail--refract {
-    -webkit-backdrop-filter: url(#profile-liquid-glass) saturate(1.5) brightness(1.06);
-    backdrop-filter: url(#profile-liquid-glass) saturate(1.5) brightness(1.06);
-  }
-
-  .section-rail--liquid::before {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.46), transparent 34%, rgba(255, 255, 255, 0.08));
-    mix-blend-mode: screen;
-  }
-
-  .section-rail-lens {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    border-radius: inherit;
-    pointer-events: none;
-  }
-
-  .section-rail-lens-scene {
-    position: absolute;
-    overflow: hidden;
-    filter: url(#profile-liquid-glass);
-  }
-
-  .section-rail.section-rail--liquid {
-    isolation: isolate;
-    background: rgba(180, 195, 210, 0.08);
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-  }
-
-  .section-rail--liquid::before {
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(165deg, rgba(255,255,255,.48), transparent 28%, transparent 68%, rgba(255,255,255,.2));
-  }
-
-  .section-rail--liquid .section-rail-link {
-    flex: 1 0 0;
-    min-width: 40px;
-  }
-
-  .section-rail.section-rail--liquid .section-rail-icon,
-  .section-rail.section-rail--liquid .section-rail-link:hover .section-rail-icon,
-  .section-rail.section-rail--liquid .section-rail-link.is-active .section-rail-icon {
-    background: transparent;
-    box-shadow: none;
-    color: inherit;
-  }
-
-  .section-rail-selection {
-    position: absolute;
-    top: 6px;
-    left: 0;
-    height: 48px;
-    border-radius: 25px;
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(150deg, rgba(255,255,255,.23), rgba(255,255,255,.03) 52%, rgba(255,255,255,.14));
-    border: 1px solid rgba(255,255,255,.42);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,.6), inset 0 -1px 2px rgba(255,255,255,.15), 0 3px 9px rgba(0,0,0,.12);
-    -webkit-backdrop-filter: blur(1px) saturate(1.3);
-    backdrop-filter: blur(1px) saturate(1.3);
-    transition: transform .32s cubic-bezier(.2,.8,.2,1), width .32s ease;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .section-rail-selection { transition: none; }
-  }
-
-  .section-rail--refract .section-rail-lens {
-    display: none;
-  }
-
-  .section-rail--liquid:has([data-section-dot="flybay"].is-active),
-  .section-rail--liquid:has([data-section-dot="plural"].is-active) {
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  .section-rail-link {
-    z-index: 2;
-  }
-
-  .section-rail-tooltip {
-    display: none;
-  }
-
-  .page-screen {
-    box-sizing: border-box;
-    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .global-footer {
-    bottom: calc(68px + env(safe-area-inset-bottom, 0px));
-  }
+  .section-rail::before { border-radius: 30px; }
+  .section-rail-link { flex: 1 1 0; min-width: 40px; width: auto; height: 50px; }
+  .section-rail-icon { width: 42px; height: 42px; }
+  .section-rail-icon svg { width: 26px; height: 26px; stroke-width: 2; }
+  .section-rail-tooltip { display: none; }
+  .page-screen { box-sizing: border-box; padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .global-footer { bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (prefers-contrast: more) {

@@ -48,13 +48,7 @@
   .section-rail { display: flex; }
   .section-rail-divider,
   .appearance-toggle { display: none; }
-  :root[data-theme="dark"] .section-rail--liquid::before { opacity: 1; }
-  :root[data-theme="dark"] .section-rail.section-rail--liquid .section-rail-icon,
-  :root[data-theme="dark"] .section-rail.section-rail--liquid .section-rail-link.is-active .section-rail-icon {
-    background: transparent;
-    box-shadow: none;
-    color: inherit;
-  }
+
 }
 @media (min-width: 769px) and (max-width: 1024px) and (hover: none) and (pointer: coarse) {
   .section-rail { display: none; }
