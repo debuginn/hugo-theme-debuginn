@@ -2,6 +2,10 @@
 
 DebugInn Hugo Theme is the open-source Hugo theme extraction of debuginn.com. The theme owns the fullscreen shell, shared sections, and extension slots. Business modules such as FlyBay stay in their own repositories and are mounted as Git submodules.
 
+## Version
+
+Current release: **v1.4.0**. Theme versions are recorded by annotated Git tags.
+
 ## Usage
 
 Clone this theme into your Hugo site:
@@ -45,9 +49,11 @@ and dark appearance. The monitor, sun, and moon icons show the selected mode.
 System is the default and follows device appearance changes; choosing it again
 returns to automatic appearance. Explicit light and dark choices are retained.
 The choice is saved as `debuginn-theme` and synchronized between tabs. The initial
-`html[data-theme]` value is applied before stylesheets load. On phones and compact
-touch screens, only the section dots are shown; the desktop navigation and
-appearance switch are hidden.
+`html[data-theme]` value is applied before stylesheets load. On phones up to
+768px wide, the section navigation uses a horizontal bottom dock with 26px icons
+and the desktop palette/selected circles; dots and the next-page control are
+hidden. Larger compact touch screens retain section dots. The appearance switch
+remains a desktop control.
 
 Each section owns its palette. Embedded modules use the resolved root attribute
 without adding their own storage or theme controller. A section can set
@@ -62,6 +68,21 @@ navigation. `ingot` remains available for a yuanbao outline.
 Hugo server previews omit analytics and use a no-referrer policy for image hosts
 that reject localhost referrers; static production builds keep their normal
 image policy and configured analytics.
+
+## Safari background extension (experimental)
+
+On an iPhone running Safari, append `?safariBleed=1` before the section fragment
+(e.g. `/?safariBleed=1#social`) to preview extended section backgrounds behind
+native browser bars. Ordinary browsing and standalone/PWA mode are unchanged.
+The opt-in mode retains each section's photo, gradients or animated mosaic,
+including the mounted Plural hero's gradients/grid. Its compact Plural layout
+reserves room for the dock; inset-only dock highlights avoid a clipped-shadow
+seam on the pale hero.
+
+Native previews have been checked in iOS 27 Simulator Safari, not on a physical
+iPhone. Browser-bar compositing is version-dependent; this remains an opt-in
+prototype pending device verification, not a default guarantee for all Safari
+versions. No mobile dock refraction or liquid-glass effect is introduced.
 
 ## Social Footer
 

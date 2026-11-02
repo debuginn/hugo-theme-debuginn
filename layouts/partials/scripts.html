@@ -1,6 +1,8 @@
 {{- $cfg := partial "functions/site-config.html" . -}}
 {{ $js := resources.Get "js/main.js" | minify | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ $safariJS := resources.Get "js/safari-edge-background.js" | minify | fingerprint }}
+<script src="{{ $safariJS.RelPermalink }}" integrity="{{ $safariJS.Data.Integrity }}" defer></script>
 {{- if where $cfg.sections "type" "closing" -}}
 {{- with resources.Get "js/sections/closing.js" -}}
 {{- $closingJS := . | minify | fingerprint -}}

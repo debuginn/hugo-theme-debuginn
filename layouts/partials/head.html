@@ -24,6 +24,8 @@
 <link rel="manifest" href="/static/site.webmanifest">
 <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="{{ $themeColor }}">
 {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+{{ $safariCSS := resources.Get "css/safari-edge-background.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $safariCSS.RelPermalink }}" integrity="{{ $safariCSS.Data.Integrity }}">
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 {{- with resources.Get "css/appearance.css" -}}
 {{- $appearanceCSS := . | minify | fingerprint -}}

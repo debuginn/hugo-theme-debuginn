@@ -25,7 +25,11 @@
       var currentSize = parseFloat(getComputedStyle(wordmark).fontSize);
       if (textWidth > 0 && targetWidth > 0 && currentSize > 0) {
         var fullWidthSize = currentSize * targetWidth / textWidth;
-        var fittedSize = Math.min(fullWidthSize * 1.40, bounds.height * .36);
+        // Short mobile screens must fit links, credit, wordmark and dock.
+        // Keep the desktop/portrait fit unchanged, but flatten the wordmark
+        // in landscape instead of letting it overlap the foreground content.
+        var heightRatio = bounds.width <= 768 && bounds.height <= 480 ? .14 : .36;
+        var fittedSize = Math.min(fullWidthSize * 1.40, bounds.height * heightRatio);
         wordmark.style.fontSize = fittedSize.toFixed(2) + 'px';
         wordmark.style.setProperty('--social-wordmark-stretch', (fullWidthSize / fittedSize).toFixed(4));
         section.style.setProperty('--social-wordmark-font', fittedSize.toFixed(2) + 'px');

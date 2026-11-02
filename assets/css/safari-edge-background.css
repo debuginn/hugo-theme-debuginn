@@ -1,0 +1,127 @@
+/* Opt-in native Safari chrome experiment; normal browsing is unchanged. */
+html.safari-edge-bleed,
+html.safari-edge-bleed body {
+  height: calc(100dvh + 260px);
+  overflow: hidden;
+  scroll-behavior: auto;
+}
+.safari-edge-background {
+  position: relative;
+  width: 100%;
+  height: calc(100dvh + 260px);
+  pointer-events: none;
+}
+.safari-edge-bleed [data-debuginn-site] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100px;
+  height: 100dvh;
+}
+/* Use one continuous background per active screen, including its overlays. */
+.safari-edge-bleed [data-safari-shared-background] {
+  background: transparent !important;
+}
+.safari-edge-bleed [data-safari-shared-background] > .page-bg {
+  visibility: hidden;
+}
+.safari-edge-bleed [data-safari-shared-background] .site-wrapper,
+.safari-edge-bleed [data-safari-shared-background] .social-page {
+  box-shadow: none;
+}
+.safari-edge-background::before,
+.safari-edge-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.safari-edge-background::before {
+  background: var(--safari-overlay-before, none);
+}
+.safari-edge-background::after {
+  background: var(--safari-overlay-after, none);
+}
+.safari-edge-background[data-section="home"]::after {
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+}
+.safari-edge-background > .cta-mosaic {
+  display: none;
+}
+.safari-edge-background[data-section="iassets"] > .cta-mosaic {
+  display: block;
+}
+.safari-edge-bleed [data-safari-shared-background] .cta-mosaic {
+  visibility: hidden;
+}
+/* The embedded Plural hero, not its section wrapper, owns the real paint. */
+.safari-edge-bleed [data-safari-shared-background] .pa-hero {
+  background: transparent !important;
+}
+.safari-edge-bleed [data-safari-shared-background] .pa-hero::before,
+.safari-edge-bleed [data-safari-shared-background] .pa-hero::after {
+  visibility: hidden;
+}
+.safari-edge-background[data-section="plural"]::before {
+  inset: auto;
+  top: var(--safari-plural-before-top);
+  right: var(--safari-plural-before-right);
+  width: var(--safari-plural-before-width);
+  height: var(--safari-plural-before-height);
+  border: var(--safari-plural-before-border);
+  border-radius: var(--safari-plural-before-border-radius);
+  transform: var(--safari-plural-before-transform);
+  opacity: var(--safari-plural-before-opacity);
+}
+.safari-edge-background[data-section="plural"]::after {
+  left: 52%;
+  opacity: var(--safari-plural-after-opacity);
+  mask-image: var(--safari-plural-after-mask);
+}
+/* A fixed dock's outer shadow is clipped at Safari's content edge, creating
+   a false background seam on this pale hero. Retain its inner highlights. */
+.safari-edge-bleed:has(#plural[data-safari-shared-background]) .section-rail {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.82), inset 0 0 0 1px rgba(255,255,255,.4);
+}
+.safari-edge-bleed[data-theme="dark"]:has(#plural[data-safari-shared-background]) .section-rail {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), inset 0 0 0 1px rgba(255,255,255,.06);
+}
+@media (max-width: 768px) and (orientation: portrait) {
+  .safari-edge-bleed #plural .pa-page,
+  .safari-edge-bleed #plural .plural-embed,
+  .safari-edge-bleed #plural .pa-hero {
+    height: 100dvh;
+    min-height: 0;
+  }
+  .safari-edge-bleed #plural .pa-hero-stage {
+    height: 100dvh;
+    min-height: 0;
+    box-sizing: border-box;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    row-gap: 10px;
+    padding: 40px 20px calc(86px + env(safe-area-inset-bottom, 0px));
+    align-content: start;
+  }
+  .safari-edge-bleed #plural .pa-hero-brand { margin-bottom: 14px; }
+  .safari-edge-bleed #plural .pa-hero-description { margin-top: 12px; line-height: 1.75; }
+  .safari-edge-bleed #plural .pa-hero-actions { margin-top: 14px; gap: 6px; }
+  .safari-edge-bleed #plural .pa-hero .pa-hero-actions > :is(a, button) {
+    min-height: 44px;
+    padding-inline: 8px;
+    font-size: 10px;
+    gap: 4px;
+  }
+  .safari-edge-bleed #plural .pa-hero-announcement { margin-top: 0; }
+  .safari-edge-bleed #plural .pa-art {
+    margin: 0 auto;
+    width: min(64vw, calc((100dvh - 420px) * 1.08));
+    max-width: 100%;
+    aspect-ratio: 1.08;
+    align-self: center;
+  }
+}
+@media (max-width: 340px) and (orientation: portrait) {
+  .safari-edge-bleed #plural .pa-art {
+    width: min(60vw, calc((100dvh - 470px) * 1.08));
+  }
+}
