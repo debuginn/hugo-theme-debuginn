@@ -85,6 +85,17 @@
     }
   }
   document.addEventListener('debuginn:themechange',function(){if(activeId)setActive(activeId)});
+  // Explicit scrolling avoids WebKit fragment navigation missing early snap panels.
+  stack.querySelectorAll('a[data-section-dot]').forEach(function(link){
+    link.addEventListener('click',function(event){
+      if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+      var target=document.getElementById(link.getAttribute('data-section-dot'));
+      if(!target)return;
+      event.preventDefault();
+      if(location.hash!=='#'+target.id)history.pushState(null,'','#'+target.id);
+      target.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+    });
+  });
   if('IntersectionObserver'in window){var observer=new IntersectionObserver(function(entries){var visible=entries.filter(function(e){return e.isIntersecting}).sort(function(a,b){return b.intersectionRatio-a.intersectionRatio})[0]; if(visible)setActive(visible.target.id)}, {root:stack,threshold:[.45,.6,.8]}); sections.forEach(function(s){observer.observe(s)})}
   var home=document.getElementById('home'); var homeBg=''; var homeThumb=''; var homeIdx=0;
   if(home){
