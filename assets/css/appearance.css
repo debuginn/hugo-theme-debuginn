@@ -44,7 +44,19 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 5px 15px color-mix(in srgb, var(--section-accent-dark, var(--section-accent)) 22%, transparent);
 }
 :root[data-theme="dark"] .section-rail-link:focus-visible .section-rail-icon { outline-color: var(--section-accent-dark, #a4bdff); }
-@media (max-width: 768px), (max-width: 1024px) and (hover: none) and (pointer: coarse) {
+@media (max-width: 768px) {
+  .section-rail { display: flex; }
+  .section-rail-divider,
+  .appearance-toggle { display: none; }
+  :root[data-theme="dark"] .section-rail--liquid::before { opacity: 1; }
+  :root[data-theme="dark"] .section-rail.section-rail--liquid .section-rail-icon,
+  :root[data-theme="dark"] .section-rail.section-rail--liquid .section-rail-link.is-active .section-rail-icon {
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) and (hover: none) and (pointer: coarse) {
   .section-rail { display: none; }
   .page-dots { display: flex; right: 10px; }
 }

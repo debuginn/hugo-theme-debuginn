@@ -1,4 +1,6 @@
 {{- $cfg := partial "functions/site-config.html" . -}}
+{{ $liquid := resources.Get "js/liquid-glass.js" | minify | fingerprint }}
+<script src="{{ $liquid.RelPermalink }}" integrity="{{ $liquid.Data.Integrity }}" defer></script>
 {{ $js := resources.Get "js/main.js" | minify | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 {{- if where $cfg.sections "type" "closing" -}}
