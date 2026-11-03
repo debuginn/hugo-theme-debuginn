@@ -1,7 +1,7 @@
 (function () {
-  // Opt-in native Safari prototype, not a release-default change.
+  // Enable native iPhone Safari background extension by default; retain an explicit opt-out.
   var query = new URLSearchParams(location.search);
-  if (query.get('safariBleed') !== '1') return;
+  if (query.get('safariBleed') === '0') return;
   var ua = navigator.userAgent;
   if (!/iPhone|iPod/.test(ua) || !/Safari/.test(ua) || /CriOS|FxiOS|EdgiOS/.test(ua)) return;
   if (navigator.standalone || matchMedia('(display-mode: standalone)').matches) return;
