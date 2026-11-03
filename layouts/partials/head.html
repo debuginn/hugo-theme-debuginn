@@ -68,3 +68,9 @@
     {{- end -}}
   {{- end -}}
 {{ end }}
+{{- if where $cfg.sections "id" "plural" -}}
+{{- with resources.Get "css/sections/plural.css" -}}
+{{- $pluralCSS := . | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $pluralCSS.RelPermalink }}" integrity="{{ $pluralCSS.Data.Integrity }}" crossorigin="anonymous">
+{{- end -}}
+{{- end -}}
