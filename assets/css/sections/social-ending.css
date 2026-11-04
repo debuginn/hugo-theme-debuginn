@@ -69,9 +69,39 @@
   bottom: calc(var(--social-wordmark-font) * .66 + 12px);
   left: 4%;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   text-align: center;
 }
+.page-screen-social .social-llms {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 10px;
+  border: 1px solid rgba(143, 168, 255, .45);
+  border-radius: 999px;
+  background: rgba(18, 28, 48, .42);
+  color: #d7e2ff;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1;
+  text-decoration: none;
+  pointer-events: auto;
+}
+.page-screen-social .social-llms svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.page-screen-social .social-llms:hover { border-color: rgba(143, 168, 255, .7); color: #fff; }
 
 .page-screen-social .social-credit {
   margin: 0;
