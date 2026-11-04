@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.5.0
+
+### Changed
+- Redesign the social ending footer as two centered rows: a compact llms.txt pill and optional compliance links, followed by copyright and subdued builder/theme/version credits.
+- Restore the existing sparkle icon in the 22px pill, with an expanded touch target and visible keyboard focus.
+- Add optional `social.footer.complianceLinks` entries (`label`, `href`); omit empty entries and never render placeholder filing information.
+- Fit credits within narrow mobile screens without changing the existing navigation or ending wordmark.
+
+### Verification
+- COM/CN Hugo builds and local Chromium desktop/mobile layouts verified. Native Safari and physical-device checks are not part of this release validation.
+
 ## v1.4.0
 
 ### Added
