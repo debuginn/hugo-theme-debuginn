@@ -4,7 +4,7 @@ DebugInn Hugo Theme is the open-source Hugo theme extraction of debuginn.com. Th
 
 ## Version
 
-Current release: **v1.4.0**. Theme versions are recorded by annotated Git tags.
+Current release: **v1.5.1**. Theme versions are recorded by annotated Git tags.
 
 ## Usage
 

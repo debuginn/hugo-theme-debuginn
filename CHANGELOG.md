@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5.1
+
+### Removed
+- Stop publishing the unused standalone `static/cover.css`; its active Bootstrap Cover-derived layout rules remain in `assets/css/main.css`.
+
+### Verification
+- COM/CN Hugo builds retain their homepages and active styles while omitting `/static/cover.css` from generated output.
+
 ## v1.5.0
 
 ### Changed
