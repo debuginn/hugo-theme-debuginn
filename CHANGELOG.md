@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.5.4
+
+### Added
+- Add a pure-white Heroicons watermark to each service card: microphone, people, academic cap, and megaphone. Geometry matches Plural's flame mark.
+- Add Plural's pointer hover light sweep on service cards. It stays off for coarse pointers and reduced motion.
+
+### Verification
+- COM/CN Hugo builds. The approved desktop preview used the same marks and sweep. Native Safari and physical devices were not tested.
+
 ## v1.5.3
 
 ### Fixed
