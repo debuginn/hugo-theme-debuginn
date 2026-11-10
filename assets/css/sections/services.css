@@ -1,6 +1,8 @@
 .page-screen-services { color: #fff; }
 .svc-bg {
-  background: url("/static/services/bg.jpg") center 52% / cover no-repeat;
+  background-position: center 52%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .svc-head {
   position: relative;
@@ -125,14 +127,6 @@
   object-fit: cover;
   box-shadow: 0 12px 26px rgba(8,64,52,.2);
 }
-.svc-ft { background: #39e055; }
-.svc-cal { background: #fff; }
-.svc-books { background: #f0881e; }
-.svc-key { background: #1a8fe8; }
-.svc-c1 { background: linear-gradient(135deg, #0c6e2e 0%, #1fae45 54%, #39e055 115%); }
-.svc-c2 { background: linear-gradient(135deg, #c41218 0%, #ff181e 54%, #ff6b6b 115%); }
-.svc-c3 { background: linear-gradient(135deg, #c24100 0%, #e85d04 54%, #f0881e 115%); }
-.svc-c4 { background: linear-gradient(135deg, #0057b8 0%, #0077e6 54%, #3aa8f7 115%); }
 .svc-top { position: relative; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .svc-copy { min-width: 0; flex: 1; }
 .svc-badge { margin: 0; color: rgba(255,255,255,.72); font-size: 11px; }

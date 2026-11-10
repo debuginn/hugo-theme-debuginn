@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5.5
+
+### Changed
+- Render the service page from the profile `services` config: heading, background, cards, colors, watermarks, and dialogs. COM and CN can now differ without a theme edit.
+
+### Verification
+- COM/CN Hugo builds render the existing copy, four watermarks, and dialogs from config. Native Safari and physical devices were not tested.
+
 ## v1.5.4
 
 ### Added
