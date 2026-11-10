@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.5.2
+
+### Added
+- Add the service page before the social ending, with four swipeable cards, matching detail dialogs, and a service navigation item on both COM and CN.
+
+### Fixed
+- Match Plural's rendered card geometry: border-box sizing and a 1.53:1 ratio on desktop and phone.
+- Preserve the carousel's leading inset when scroll snapping so the first card does not slide flush to the viewport edge.
+
+### Verification
+- COM/CN Hugo builds and Chromium desktop/phone card dimensions checked against Plural. Native Safari and physical-device rendering are not covered by these checks.
+
 ## v1.5.1
 
 ### Removed

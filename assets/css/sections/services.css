@@ -41,6 +41,7 @@
   gap: 16px;
   padding-left: 176px;
   padding-right: 32px;
+  scroll-padding-left: 176px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -48,8 +49,9 @@
 .svc-stage::-webkit-scrollbar { display: none; }
 .svc-slot { flex: 0 0 350px; scroll-snap-align: start; }
 .svc-card {
+  box-sizing: border-box;
   width: 350px;
-  height: 229px;
+  aspect-ratio: 1.53 / 1;
   position: relative;
   overflow: hidden;
   border-radius: 30px;
@@ -172,7 +174,7 @@
   .svc-head { padding: 102px 22px 0; max-width: none; }
   .svc-title { font-size: 29px; }
   .svc-desc { max-width: 19rem; margin-top: 12px; font-size: 12px; }
-  .svc-stage { bottom: 144px; padding: 0 0 0 22px; gap: 16px; }
+  .svc-stage { bottom: 144px; padding: 0 0 0 22px; scroll-padding-left: 22px; gap: 16px; }
   .svc-slot { flex-basis: min(342px, 84vw); }
   .svc-card { width: 100%; height: auto; aspect-ratio: 1.53 / 1; }
 }
