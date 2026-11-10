@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5.3
+
+### Fixed
+- Align the service heading and carousel with Plural's responsive desktop inset instead of a fixed 176px offset. Both begin at 96px on a 1280px viewport, 176px at 1440px, and 416px at 1920px; phone alignment remains 22px.
+
+### Verification
+- COM/CN Hugo builds and Chromium desktop/phone geometry checked. Native Safari and physical devices were not tested.
+
 ## v1.5.2
 
 ### Added
