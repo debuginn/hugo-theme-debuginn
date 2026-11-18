@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5.6
+
+### Changed
+- Hide the social ending wordmark when `social.footer.wordmark` is explicitly empty. A missing key still defaults to DEBUGINN.
+
+### Verification
+- COM Hugo preview showed the social page without the large wordmark on desktop and phone. Native Safari and physical devices were not tested.
+
 ## v1.5.5
 
 ### Changed

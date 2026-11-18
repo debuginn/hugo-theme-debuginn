@@ -276,3 +276,20 @@
 @media (prefers-reduced-motion: reduce) {
   .page-screen-social .social-wordmark-sheen { transition: none; }
 }
+
+.page-screen-social:not(:has(.social-wordmark)) .social-signature {
+  bottom: 28px;
+}
+
+@media (max-width: 768px) {
+  .page-screen-social:not(:has(.social-wordmark)) .social-media {
+    bottom: calc(122px + env(safe-area-inset-bottom, 0px));
+  }
+  .page-screen-social:not(:has(.social-wordmark)) .social-signature {
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (min-width: 769px) and (max-height: 480px) {
+  .page-screen-social:not(:has(.social-wordmark)) .social-signature { bottom: 16px; }
+}

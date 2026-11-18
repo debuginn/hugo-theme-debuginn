@@ -1,5 +1,9 @@
 {{- $credit := .cfg.site.footerCredit | default dict -}}
-{{- $wordmark := .cfg.social.footer.wordmark | default "DEBUGINN" -}}
+{{- $footer := .cfg.social.footer | default dict -}}
+{{- $wordmark := "DEBUGINN" -}}
+{{- if isset $footer "wordmark" -}}
+  {{- $wordmark = $footer.wordmark -}}
+{{- end -}}
 <footer class="social-signature" aria-label="网站版权">
   <div class="social-footer-tools">
     <a class="social-llms" href="/llms.txt" aria-label="查看 AI 可读的 llms.txt">
@@ -15,7 +19,9 @@
   </div>
   <p class="social-credit" data-social-credit>© {{ .cfg.site.copyrightStartYear }}-{{ now.Format "2006" }} <a href="{{ $credit.copyrightHref | default .cfg.site.url | default "/" }}">{{ $credit.copyrightLabel | default .cfg.site.title }}</a>{{- with $credit -}}<span class="social-credit-separator" aria-hidden="true"> · </span>{{ .builderPrefix | default "Built with " }}<a href="{{ .builderHref | default "https://gohugo.io/" }}" target="_blank" rel="noopener noreferrer">{{ .builderLabel | default "Hugo" }}</a><span class="social-credit-separator" aria-hidden="true"> / </span>Theme <a href="{{ .themeHref | default "https://github.com/debuginn/hugo-theme-debuginn" }}" target="_blank" rel="noopener noreferrer">{{ .themeLabel | default "Debuginn" }}</a> {{ .version }}{{- end -}}</p>
 </footer>
+{{- if $wordmark -}}
 <div class="social-wordmark" data-social-wordmark role="img" aria-label="{{ $wordmark }}">
   <span class="social-wordmark-base" aria-hidden="true">{{ $wordmark }}</span>
   <span class="social-wordmark-sheen" aria-hidden="true">{{ $wordmark }}</span>
 </div>
+{{- end -}}

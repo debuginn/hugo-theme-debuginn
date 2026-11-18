@@ -9,8 +9,22 @@
     var base = wordmark && wordmark.querySelector('.social-wordmark-base');
     var sheen = wordmark && wordmark.querySelector('.social-wordmark-sheen');
     var credit = section.querySelector('[data-social-credit]');
-    if (!page || !wordmark || !base || !sheen || section.dataset.socialEndingInitialized === 'true') return;
+    if (!page || section.dataset.socialEndingInitialized === 'true') return;
     section.dataset.socialEndingInitialized = 'true';
+    if (!wordmark || !base || !sheen) {
+      function fitCredit() {
+        if (!credit) return;
+        var maxSize = parseFloat(getComputedStyle(section).getPropertyValue('--social-credit-max')) || 13;
+        credit.style.fontSize = maxSize + 'px';
+        if (credit.scrollWidth > credit.clientWidth) {
+          credit.style.fontSize = (maxSize * credit.clientWidth / credit.scrollWidth * .98).toFixed(2) + 'px';
+        }
+      }
+      fitCredit();
+      if ('ResizeObserver' in window) new ResizeObserver(fitCredit).observe(page);
+      else window.addEventListener('resize', fitCredit, { passive: true });
+      return;
+    }
     var measureFrame = 0;
     var pointerFrame = 0;
     var pointer = null;
