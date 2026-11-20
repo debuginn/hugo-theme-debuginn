@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5.8
+
+### Changed
+- Support a locale-specific masthead title independent of page and search titles.
+
+### Verification
+- CN and COM Hugo builds checked. Native Safari and physical devices were not tested.
+
 ## v1.5.7
 
 ### Changed
