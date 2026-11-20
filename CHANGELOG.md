@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5.7
+
+### Changed
+- Render CN compliance links as compact icon-and-label pills beside the llms.txt pill.
+
+### Verification
+- CN Hugo build and desktop/phone footer previews checked. Native Safari and physical devices were not tested.
+
 ## v1.5.6
 
 ### Changed
