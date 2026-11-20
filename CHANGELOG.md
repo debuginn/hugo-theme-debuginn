@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.5.9
+
+### Changed
+- Keep the final service card clear of the fixed desktop section rail.
+- Raise service cards on phones and use a briefcase outline with a distinct violet service accent.
+
+### Verification
+- CN/COM Hugo builds and CN desktop/phone previews checked. Native Safari and physical devices were not tested.
+
 ## v1.5.8
 
 ### Changed
