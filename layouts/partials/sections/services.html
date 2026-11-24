@@ -28,7 +28,7 @@
 </section>
 <script>
 (function () {
-  var root = document.getElementById({{ .section.id | jsonify }});
+  var root = document.getElementById({{ .section.id }});
   if (!root || root.dataset.svcBound) return;
   root.dataset.svcBound = "1";
   function closeAll() {
